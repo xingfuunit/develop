@@ -54,7 +54,7 @@ class Images extends \yii\db\ActiveRecord
         //$command = $db->createCommand($sql);
         //$command->bindParam(":image_id_str", implode(',', $image_id_list));
         //$res = $command->queryAll();
-        $res = self::find()->where(array('in', 'image_id', $image_id_list)->all();
+        $res = self::find()->where(['image_id' => $image_id_list])->all();
         return $res;
     }
 
