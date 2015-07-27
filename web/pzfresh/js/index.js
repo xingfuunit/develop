@@ -111,5 +111,9 @@ define(function(require, exports, module) {
             sidebar.addClass('active');
             mask.show();
         });
+
+        sidebar.find('.menu-nav').click(function(){
+            $(this).parent().addClass('open').siblings().removeClass('open');
+        });
     };
 });
