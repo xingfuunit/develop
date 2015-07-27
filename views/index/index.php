@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>品珍鲜活</title>
-		<meta name="viewport" content="initial-scale=1.0,width=device-width,maximum-scale=1,user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/wxshop.css">
-	</head>
-	<body class="bg-grey">
 		<header class="index-header">
 			<h1>
 			<a class="company-link" href="">
@@ -50,10 +40,10 @@
 				</div>
 				<div class="nav">
 					<ul>
-						<li><a id="sidebar-open" href="javascript:void(0)"><img src="../img/icon/k1.jpg" draggable="false"></a></li>
-						<li><a href="http://www.pinzhen365.com/wap/active-alist.html"><img src="../img/icon/k2.jpg" draggable="false"></a></li>
-						<li><a href="http://www.pinzhen365.com/wap/gallery-productsHot.html"><img src="../img/icon/k3.jpg" draggable="false"></a></li>
-						<li><a href="http://www.pinzhen365.com/wap/active-hyday.html"><img src="../img/icon/k4.jpg" draggable="false"></a></li>
+						<li><a id="sidebar-open" href="javascript:void(0)"><img src="./pzfresh/img/icon/k1.jpg" draggable="false"></a></li>
+						<li><a href="http://www.pinzhen365.com/wap/active-alist.html"><img src="./pzfresh/img/icon/k2.jpg" draggable="false"></a></li>
+						<li><a href="http://www.pinzhen365.com/wap/gallery-productsHot.html"><img src="./pzfresh/img/icon/k3.jpg" draggable="false"></a></li>
+						<li><a href="http://www.pinzhen365.com/wap/active-hyday.html"><img src="./pzfresh/img/icon/k4.jpg" draggable="false"></a></li>
 					</ul>
 				</div>
 				<div class="promotion">
@@ -112,13 +102,13 @@
 					<div class="pro-item">
 						<h2 class="item-name"><?=$product['top_cat']['cat_name']?><a href="http://www.pinzhen365.com/wap/gallery-<?=$product['top_cat']['cat_id']?>.html">更多</a></h2>
 						<ul>
-							<?php foreach ($product['product'] as $val) { ?>
+							<?php foreach ($product['products'] as $val) { ?>
 							<li>
 								<a href="<?=$val['product_id']?>">
 								<img src="<?=$val['img']?>">
 								<div class="info">
 									<h3><?=$val['product_name']?></h3>
-									<span class="selled">已售：819份</span>
+									<span class="selled">已售：<?=$val['buy_count']?>份</span>
 									<br>
 									<b>&yen;<?=$val['price']?></b>
 								</div>
@@ -131,7 +121,7 @@
 					<?php } ?>
 				</div>
 				<div class="foot-banner">
-					<img src="../img/pic/qming.jpg">
+					<img src="./pzfresh/img/pic/qming.jpg">
 				</div>
 			</div>
 			<div id="sidebar">
@@ -194,10 +184,10 @@
 				<li><a href="http://www.pinzhen365.com/wap/member.html"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
 			</ul>
 		</footer>
-		<script type="text/javascript" src="../js/sea.js"></script>
+		<script type="text/javascript" src="./pzfresh/js/sea.js"></script>
 		<script type="text/javascript">
 			seajs.config({
-				base: "../js",
+				base: "./pzfresh/js",
 				alias: {
 					"jquery": "jquery.sea",
 					"jqueryTouchSwipe": "jquery.TouchSwipe.sea"
@@ -210,5 +200,3 @@
 				comm.shopCart();
 			});
 		</script>
-	</body>
-</html>
