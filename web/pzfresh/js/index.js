@@ -7,7 +7,7 @@ define(function(require, exports, module) {
             animate = 0,
             pics = container.find('li'),
             num = pics.length,
-            switchTxt = '',
+            switchTxt = '', 
             time = transition / 1000 || 1,
             active = 1,
             WIDTH, HEIGHT, nextMove;
