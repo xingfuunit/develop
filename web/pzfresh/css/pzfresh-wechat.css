@@ -1,6 +1,5 @@
 /******************************************************************/
 .titleBar, .footerBar { width: 100%; color: #fff; font-size: 1rem; padding: 0.5rem; background: #309ab2; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; z-index: 3; }
-
 .titleBar { position: relative; height: 3rem; line-height: 3rem; }
 .titleBar > i { position: absolute; top: 50%; right: 1.5rem; height: 2rem; font-size: 1.5rem; line-height: 2rem; margin-top: -1rem; }
 
