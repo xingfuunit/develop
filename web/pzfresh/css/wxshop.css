@@ -35,7 +35,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 html { font-size: 62.5%; }
 
-body, input { font: 62.5%/150% Helvetica,Tahoma,"微软雅黑"; color: #333; }
+body, input { font: 1rem/150% Helvetica,Tahoma,"微软雅黑"; color: #333; }
 
 body.bg-grey { background-color: #eee; }
 
@@ -50,7 +50,8 @@ header a, footer a { color: #fff; }
 
 header { background: url("../img/bg/tt.jpg"); font-size: 20px; position: relative; line-height: 49px; text-align: center; }
 header h1 { font-size: 20px; font-weight: 400; }
-header .goback { display: block; position: absolute; left: 20px; top: 0; }
+header .left { display: block; position: absolute; left: 20px; top: 0; }
+header .right { display: block; position: absolute; right: 20px; top: 0; }
 
 footer { font-size: 12px; background: #309ab2; position: fixed; left: 0; right: 0; bottom: 0; }
 footer ul { overflow: hidden; }
@@ -72,8 +73,6 @@ footer ul li i .cart-num { background-color: #DD514C; position: absolute; left: 
 
 /*******comm end*******/
 /********index*********/
-header.index-header .company-link { display: block; position: absolute; right: 20px; top: 0; }
-
 #index-page #banner .banner-wrapper { overflow: hidden; padding-bottom: 62.5%; height: 0; position: relative; }
 #index-page #banner ul.banner-scroll { position: absolute; height: 0; width: 5000px; }
 #index-page #banner ul.banner-scroll li { width: 320px; float: left; overflow: hidden; }
@@ -96,18 +95,18 @@ header.index-header .company-link { display: block; position: absolute; right: 2
 #index-page .content .promotion .volume { font-size: 1.5em; color: #48A4B9; padding-bottom: 2px; }
 #index-page .content .promotion .volume i { display: index-block; width: 20px; }
 #index-page .content .promotion p img { width: 100%; }
-#index-page .content .pro-scan .pro-item { border-top: 1px solid #CCC; margin-top: 15px; }
+#index-page .content .pro-scan .pro-item { border-top: 1px solid #CCC; margin-top: 10px; }
 #index-page .content .pro-scan .pro-item .item-name { color: #48A4B9; font-size: 18px; border-left: 3px solid #48A4B9; line-height: 28px; padding-left: 10px; margin: 8px 0; }
 #index-page .content .pro-scan .pro-item .item-name a { font-size: 16px; color: #999; vertical-align: baseline; float: right; font-weight: 400; }
 #index-page .content .pro-scan .pro-item ul { overflow: hidden; margin: 0 -5px; }
-#index-page .content .pro-scan .pro-item ul li { float: left; box-sizing: border-box; width: 50%; padding: 0 5px; position: relative; }
+#index-page .content .pro-scan .pro-item ul li { float: left; box-sizing: border-box; width: 50%; padding: 5px 5px; position: relative; }
 #index-page .content .pro-scan .pro-item ul li a { background: #fff; display: block; }
 #index-page .content .pro-scan .pro-item ul li a div.info { padding: 0 5px; }
 #index-page .content .pro-scan .pro-item ul li img { width: 100%; }
 #index-page .content .pro-scan .pro-item ul li h3 { color: #555; font-size: 14px; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-#index-page .content .pro-scan .pro-item ul li span.selled { font-size: 14px; color: #48a4b9; }
+#index-page .content .pro-scan .pro-item ul li span.selled { font-size: 14px; color: #48A4B9; }
 #index-page .content .pro-scan .pro-item ul li b { font-size: 18px; color: #DD514C; }
-#index-page .content .pro-scan .pro-item ul li i { font-size: 18px; line-height: 28px; width: 28px; height: 28px; text-align: center; vertical-align: middle; position: absolute; right: 10px; bottom: 5px; border-radius: 50%; color: #48A4B9; border: 1px solid #48A4B9; cursor: pointer; }
+#index-page .content .pro-scan .pro-item ul li i { font-size: 18px; line-height: 28px; width: 28px; height: 28px; text-align: center; vertical-align: middle; position: absolute; right: 10px; bottom: 10px; border-radius: 50%; color: #48A4B9; border: 1px solid #48A4B9; cursor: pointer; }
 #index-page .content .foot-banner { margin: 10px -10px 40px; }
 #index-page .content .foot-banner img { width: 100%; }
 
@@ -242,5 +241,23 @@ header.index-header .company-link { display: block; position: absolute; right: 2
 #product-search .search-msg .search-recent { color: #359FB7; font-weight: 400; line-height: 1.6; font-size: 1.6em; }
 #product-search .search-msg .search-list { margin-top: 10px; }
 #product-search .search-msg .search-list a { display: inline-block; font-size: 1em; line-height: 2em; border: 1px solid #aaa; border-radius: 0.5em; color: #999; background-color: #fff; margin-right: 10px; padding: 0 10px; }
+
+/********hot-sell********/
+#hot-sell { background: #eee; line-height: 1.5; margin-bottom: 50px; }
+#hot-sell .hot-sample { color: #359FB7; font-size: 15px; padding: 10px; }
+#hot-sell .hot-sample a { color: #359FB7; }
+#hot-sell .hot-list { box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); padding: 10px 10px 1px; }
+#hot-sell .hot-list a { color: #999; }
+#hot-sell .hot-list .hot-item { background: #fff; margin-bottom: 10px; }
+#hot-sell .hot-list .hot-item .sell-pic { position: relative; }
+#hot-sell .hot-list .hot-item .sell-pic .sell-num { color: #fff; position: absolute; left: 0; top: 0; background: rgba(0, 0, 0, 0.6); }
+#hot-sell .hot-list .hot-item .sell-pic .sell-num i { float: left; font-style: normal; background: #E75365; width: 30px; height: 20px; text-align: center; font-size: 15px; border-top-right-radius: 50%; border-bottom-right-radius: 50%; }
+#hot-sell .hot-list .hot-item .sell-pic .sell-num span { float: left; padding: 0 5px; padding-top: 3px; }
+#hot-sell .hot-list .hot-item .sell-pic img { width: 100%; }
+#hot-sell .hot-list .hot-item .sell-desc { position: relative; padding-left: 5px; }
+#hot-sell .hot-list .hot-item .sell-desc .sell-title { font-size: 15px; }
+#hot-sell .hot-list .hot-item .sell-desc .sell-price span { font-size: 15px; color: #E75365; display: inline-block; padding: 0 5px; }
+#hot-sell .hot-list .hot-item .sell-desc .sell-price del { font-size: 10px; }
+#hot-sell .hot-list .hot-item .sell-desc i { font-size: 18px; line-height: 28px; width: 28px; height: 28px; text-align: center; vertical-align: middle; position: absolute; right: 10px; bottom: 10px; border-radius: 50%; color: #48A4B9; border: 1px solid #48A4B9; cursor: pointer; }
 
 /*# sourceMappingURL=wxshop.css.map */

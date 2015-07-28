@@ -8,12 +8,12 @@
 		<link rel="stylesheet" type="text/css" href="../css/wxshop.css">
 	</head>
 	<body class="bg-grey">
-		<header class="index-header">
+		<header>
 			<h1>
-			<a class="company-link" href="">
-			<i class="fa fa-exclamation-circle"></i>
-			</a>
 			<a href="#">搜索商品</a>
+			<a class="right" href="#">
+				<i class="fa fa-exclamation-circle"></i>
+			</a>
 			</h1>
 		</header>
 
