@@ -206,8 +206,8 @@ echo $results['png']->getHeader('Content-Length');*/
         $cat_id = $request->get('cat_id');
         $page = $request->get('page', 1);
         $type = $request->get('type', 1);
-        $ProductList = $this->productservice->getProductList($cat_id, $page, $type);
-        $num = $this->productservice->getGoodsNum($cat_id);
+        $ProductList = $this->productService->getProductList($cat_id, $page, $type);
+        $num = $this->productService->getGoodsNum($cat_id);
         return $this->render('gallery', ['ProductList' => $ProductList, 'num' => $num, 'cat_id' => $cat_id, 'type' => $type]);
     }
 

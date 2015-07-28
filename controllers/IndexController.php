@@ -78,14 +78,6 @@ class IndexController extends Controller
             $products = $this->productService->getIndexProductListByCat($val['cat_id']);
             $index_products[] = ['top_cat' => ['cat_id' => $val['cat_id'], 'cat_name' => $val['cat_name']], 'products' => $products];
         }
-        //品珍鲜果
-        //$xg_products = $this->productService->getIndexProductListByCat(23);
-        //品珍海鲜
-        //$hx_products = $this->productService->getIndexProductListByCat(23);
-        //品珍鲜肉
-        //$xr_products = $this->productService->getIndexProductListByCat(28);
-        //品珍精选
-        //$jx_products = $this->productService->getIndexProductListByCat(23);
 
         $list = $this->advertService->getAdvertList();
         //首页滚动banner
@@ -115,6 +107,16 @@ class IndexController extends Controller
             $roll_texts = $list['index_roll_text'];
         }
 
+        $this->getView()->title = '品珍鲜活';
+        // Yii::app()->params['old_site'];
+        //$this->registerCss()
         return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_texts' => $roll_texts]);
+    }
+
+    public function discuss()
+    {
+        $request = \Yii::$app->request;
+        $product_id = $request->get('product_id');
+
     }
 }

@@ -7,7 +7,7 @@ define(function(require, exports, module) {
             animate = 0,
             pics = container.find('li'),
             num = pics.length,
-            switchTxt = '',
+            switchTxt = '', 
             time = transition / 1000 || 1,
             active = 1,
             WIDTH, HEIGHT, nextMove;
@@ -110,6 +110,10 @@ define(function(require, exports, module) {
         $('#sidebar-open').click(function(){
             sidebar.addClass('active');
             mask.show();
+        });
+
+        sidebar.find('.menu-nav').click(function(){
+            $(this).parent().addClass('open').siblings().removeClass('open');
         });
     };
 });
