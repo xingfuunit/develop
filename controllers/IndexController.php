@@ -112,4 +112,11 @@ class IndexController extends Controller
         //$this->registerCss()
         return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_texts' => $roll_texts]);
     }
+
+    public function discuss()
+    {
+        $request = \Yii::$app->request;
+        $product_id = $request->get('product_id');
+
+    }
 }
