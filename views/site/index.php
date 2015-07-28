@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>品珍鲜活</title>
-		<meta name="viewport" content="initial-scale=1.0,width=device-width,maximum-scale=1,user-scalable=no">
+		<meta name="viewport" content="initial-scale=1.0,width=device-width,maximum-scale=1,minimum-scale=1.0,user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/wxshop.css">
 	</head>
