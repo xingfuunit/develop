@@ -10,7 +10,7 @@ input[type="radio"]{-webkit-appearance:normal;outline:none;}
 input[type="button"],input[type="text"]{-webkit-appearance: none;outline: none;}
 input[type="button"]{text-indent: 0;}
 input[type="text"]{text-indent: 10px;}
-input[type='number']{-moz-appearance:textfield;-webkit-appearance:textfield;appearance:textfield;}/*去除输入框右侧的加减按钮*/
+input[type='number']{-moz-appearance:textfield;-webkit-appearance:textfield;appearance:textfield;}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none;margin: 0;}
 body{font-family:"Microsoft YaHei","微软雅黑",Tahoma,Arial,Helvetica,"宋体";font-size:62.5%;background:#FFF;-moz-user-select:none;-khtml-user-select:none;-webkit-font-smoothing:antialiaed;font-weight: normal;}
