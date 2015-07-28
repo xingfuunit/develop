@@ -45,6 +45,7 @@
         <span id='click' value=""></span>
         <span id='search' value="<?php echo $search ?>"></span>
         <span id='keywords' value="<?php echo $keywords ?>"></span>
+        <span id='url' value="<?php echo Yii::$app->urlManager->createUrl(['site/product']); ?>"></span>
         <div class="footerBar">
             <ul>
                 <li><i class="fa fa-home"></i>首页</li>
