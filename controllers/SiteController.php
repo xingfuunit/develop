@@ -67,30 +67,52 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $cookies = Yii::$app->request->cookies;
+        $cover = $cookies->getValue('cover', '1');
+        if (! $cover) {
+            $this->redirect('xxxx');
+        }
         //获取分类树
         $tree = $this->categoryService->getCateTree();
-        //品珍鲜果
-        $xg_products = $this->productService->getIndexProductListByCat(23);
-        //品珍海鲜
-        $hx_products = $this->productService->getIndexProductListByCat(23);
-        //品珍鲜肉
-        $xr_products = $this->productService->getIndexProductListByCat(28);
-        //品珍精选
-        $jx_products = $this->productService->getIndexProductListByCat(23);
+        //获取顶级分类
+        $index_products = [];
+        foreach ($tree as $val) {
+            $products = $this->productService->getIndexProductListByCat($val['cat_id']);
+            $index_products[] = ['top_cat' => ['cat_id' => $val['cat_id'], 'cat_name' => $val['cat_name']], 'products' => $products];
+        }
 
         $list = $this->advertService->getAdvertList();
         //首页滚动banner
-        $roll_banners = $list[3];
+        $roll_banners = [];
+        if (array_key_exists('index_roll_banner', $list)) {
+            $roll_banners = $list['index_roll_banner'];
+        }
+
         //首页优惠券广告
-        /*$coup_ads = $list[4];
+        $coup_ads = [];
+        if (array_key_exists('index_coup_banner', $list)) {
+            $coup_ads = $list['index_coup_banner'];
+        }
         //促销图片广告
-        $pic_ads = $list[5];
+        $pic_ads = [];
+        if (array_key_exists('index_pic_banner', $list)) {
+            $pic_ads = $list['index_pic_banner'];
+        }
         //送免邮券广告
-        $freeship_ads = $list[6];
+        $freeship_ads = [];
+        if (array_key_exists('index_coup_mianyou', $list)) {
+            $freeship_ads = $list['index_coup_mianyou'];
+        }
         //滚动文字
-        $roll_texts = $list[7];*/
-        //print_r($list);
-        return $this->render('index', ['cat_tree' => $tree, '']);
+        $roll_texts = [];
+        if (array_key_exists('index_coup_mianyou', $list)) {
+            $roll_texts = $list['index_roll_text'];
+        }
+
+        $this->getView()->title = '品珍鲜活';
+        // Yii::app()->params['old_site'];
+        //$this->registerCss()
+        return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_texts' => $roll_texts]);
     }
 
     public function actionLogin()
@@ -219,5 +241,13 @@ echo $results['png']->getHeader('Content-Length');*/
         $type = $request->get('type', 1);
         $ProductList = $this->productservice->getProductList($cat_id, $page, $type);
         echo json_encode($ProductList);
+    }
+
+    public function actionDiscuss()
+    {
+        $request = \Yii::$app->request;
+        $product_id = (int)$request->get('product_id');
+        $page = (int)$request->get('page');
+        //echo json_encode();
     }
 }
