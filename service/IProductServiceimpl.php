@@ -5,6 +5,7 @@ namespace app\service;
 use app\models\Product;
 use app\models\Images;
 use yii\base\Object;
+use app\models\Goods;
 /**
  *业务逻辑实现
  *实现商品业务逻辑接口
