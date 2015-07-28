@@ -6,20 +6,19 @@ use app\models\Product;
 use app\models\Images;
 use yii\base\Object;
 use app\models\Goods;
+
 /**
- *业务逻辑实现
- *实现商品业务逻辑接口
+ * 业务逻辑实现
+ * 实现商品业务逻辑接口
  *
  */
-class IProductServiceimpl extends Object implements IProductService
-{
-    public function __construct()
-    {
+class IProductServiceimpl extends Object implements IProductService {
+
+    public function __construct() {
         parent::__construct();
     }
 
-    public function getIndexProductListByCat($cat_id)
-    {
+    public function getIndexProductListByCat($cat_id) {
         //$list = Product::getInstance()->geIndexGoodsList();
         $category_service = \Yii::createObject('categoryservice');
         $cat_list = $category_service->getChildrenCat($cat_id);
@@ -46,13 +45,14 @@ class IProductServiceimpl extends Object implements IProductService
         return $product_list;
     }
 
-     /*
+    /*
      * $cat_id 栏目id
      * $page 页数
      * $type 排序类型
      */
 
-    public function getProductList($cat_id, $page, $type) {
+    public function getProductList($cat_id, $page, $type, $search = NUlL) {
+        $product = array();
         switch ($type) {
             case 1://销量倒序
                 $order = "order by g.buy_count desc";
@@ -74,17 +74,32 @@ class IProductServiceimpl extends Object implements IProductService
         }
         $offset = 5;
         $pagesize = $page > 1 ? $offset * ($page - 1) : 0;
-        $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
-                . "join {{%images}} i on i.image_id = g.image_default_id  where g.cat_id = :cat_id"
-                . " and p.is_default = 1  $order limit :pagesize,:offset";
-        ;
+        if ($search == 'search') {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
+                    . " and p.is_default = 1  $order limit :pagesize,:offset";
+        } else {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.cat_id = :cat_id"
+                    . " and p.is_default = 1  $order limit :pagesize,:offset";
+        }
         $db = \yii::$app->db;
         $command = $db->createCommand($sql);
-        $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        if ($search == 'search') {
+            $cat_id1 = '%' . $cat_id . '%';
+            $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
+            $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        } else {
+            $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        }
         $command->bindParam(":pagesize", $pagesize, \yii\db\mssql\PDO::PARAM_INT);
         $command->bindParam(":offset", $offset, \yii\db\mssql\PDO::PARAM_INT);
-        $product = $command->queryAll();
-        return $product;
+        $productList = $command->queryAll();
+//        $product['num'] = count($productList);
+//        $product['product'] = $productList;
+        return $productList;
 //        $goods = Goods::find()->where('cat_id=:cat_id', [':cat_id' => $cat_id])->asArray()->all();
 //        $goods_id = array();
 //        foreach ($goods as $good) {
@@ -94,9 +109,16 @@ class IProductServiceimpl extends Object implements IProductService
 //        var_dump($product);exit;
     }
 
-    public function getGoodsNum($cat_id) {
-        $num = Goods::find()->where('cat_id=:cat_id', [':cat_id' => $cat_id])->asArray()->all();
-        return count($num);
+    //热销商品
+    public function getHotProducts() {
+        $sql = "select * from {{%goods}} g left  "
+                . "join {{%images}} i on i.image_id = g.image_default_id  "
+                . "join {{%product}} p on g.goods_id = p.goods_id "
+                . "group by g.goods_id order by g.buy_count desc limit 10 ";
+        $db = \yii::$app->db;
+        $command = $db->createCommand($sql);
+        $HotProduct = $command->queryAll();
+        return $HotProduct;
     }
-}
 
+}
