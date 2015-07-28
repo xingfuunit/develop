@@ -37,6 +37,19 @@ $config = [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,//启用路由
+            'showScriptName' => false,//false为隐藏 index.php
+            'suffix'=>'.html',//后缀
+            //规则
+            'rules' => [
+                //'' => 'site/index',
+                //'test/index/<id:\d+>/<page:\d+>'=>'test/index',
+                //'test/index/<id:\d+>/<cate>'=>'test/index',
+                //'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ]
+        ],
+
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
