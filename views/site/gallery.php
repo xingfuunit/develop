@@ -16,7 +16,7 @@
                 <?php foreach ($ProductList as $product) { ?>
                     <dl>
                         <dt>
-                        <?php //echo $product['intro']; ?>
+                        <?php //echo $product['thumb_url']; ?>
                         <img src="http://pzfresh.com/public/images/a0/6a/99/6332cb1094516d4b562e919825e2577855e8d20d.jpg?1432019152#w"/>
                         </dt>
                         <dd>
@@ -43,6 +43,9 @@
         <span id='cat_id' value="<?php echo $cat_id; ?>"></span>
         <span id='type' value="<?php echo $type; ?>"></span>
         <span id='click' value=""></span>
+        <span id='search' value="<?php echo $search ?>"></span>
+        <span id='keywords' value="<?php echo $keywords ?>"></span>
+        <span id='url' value="<?php echo Yii::$app->urlManager->createUrl(['site/product']); ?>"></span>
         <div class="footerBar">
             <ul>
                 <li><i class="fa fa-home"></i>首页</li>

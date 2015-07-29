@@ -2,17 +2,18 @@ define(function(require, exports, module) {
 
     var $url = 'http://pzfresh.com/wap';
     //返回上一页
-	function returnback(){
-		$('.titleBar span').click(function(){
-			history.back();
-		});
-		$('.fa-search').on('click',function(){
-			window.location.href = $url+'/simplesearch.html';
-		});
-		$('.fa-home').on('click',function(){
-			window.location.href = $url;
-		});
-	};
+    function returnback() {
+        $('.titleBar span').click(function() {
+            history.back();
+        });
+        $('.fa-search').on('click', function() {
+            window.location.href = $url + '/simplesearch.html';
+        });
+        $('.fa-home').on('click', function() {
+            window.location.href = $url;
+        });
+    }
+    ;
     exports.returnback = returnback;
 
     //商品排序方法切换
@@ -56,7 +57,8 @@ define(function(require, exports, module) {
             $('.product').children().remove('dl');
             addPage();
         });
-    };
+    }
+    ;
     exports.tab = tab;
 
     //向下滑动，产生瀑布流效果 && 点击弹窗
@@ -67,7 +69,8 @@ define(function(require, exports, module) {
                 addPage();
             }
         });
-    };
+    }
+    ;
     exports.swipedown = swipedown;
 
     var ajax = '';
@@ -84,14 +87,17 @@ define(function(require, exports, module) {
         var cat_id = $('#cat_id').attr('value');
         var type = $('#type').attr('value');
         var click = $('#click').attr('value');
+        var search = $('#search').attr('value');
+        var keywords = $('#keywords').attr('value');
+        var url = $('#url').attr('value');
         if (page <= num || click == 'click') {
             status = false;
             $.ajax({
-                url: "http://localhost/yii2/pzfresh_weixin/web/index.php?r=site/product",
+                url: url,
                 type: "get",
                 data: {'type': type, 'cat_id': cat_id, 'page': page},
                 timeout: 1000,
-                async:false,
+                async: false,
                 success: function(result) {
                     result = eval('(' + result + ')')
                     $.each(result, function(i, value) {
@@ -107,10 +113,10 @@ define(function(require, exports, module) {
                                 '<li class="current-price">' + value.price + '</li>' +
                                 '<li class="old-price">' +
                                 '<del>' + value.mktprice + '</del>' +
-                                '</li>'+
-                                '<li class="cart">'+
-                                    '<i class="fa fa-shopping-cart"></i>'+
-                                '</li>'+
+                                '</li>' +
+                                '<li class="cart">' +
+                                '<i class="fa fa-shopping-cart"></i>' +
+                                '</li>' +
                                 '</ul>' +
                                 '</dd>' +
                                 '</dl>';
@@ -120,13 +126,13 @@ define(function(require, exports, module) {
                     if (click != 'click')
                     {
                         page++;
-                        $('.page-num > i:first-child').text(page-1);
-                    }else{
+                        $('.page-num > i:first-child').text(page - 1);
+                    } else {
                         $('.page-num > i:first-child').text(1);
-                        if(page<num)
-                        page++;
+                        if (page < num)
+                            page++;
                     }
-                    
+
                 }
             });
         }
@@ -144,52 +150,54 @@ define(function(require, exports, module) {
     ;
 
     //加入购物车，弹层信息 
-	function cart(){
-		var retimenum = 3;
-	    var timer=null;
-		$('.cart i').on('click',function(){
-			$('.cover').fadeIn();
-			clearInterval( timer );
-			timer = setInterval( function(){
-				retimenum--;
-				if( retimenum == 0 ){
-					clearInterval( timer );
-					$('.cover').fadeOut('fast');
-					retimenum = 3;
-					$('.cover i').text(3);
-				} 
-				else{
-					$('.cover i').text( retimenum );
-					$('.cover li:nth-of-type(2)').on('click',function(){
-					 window.location.href=$url+'/cart.html';
-					});
-					$('.cover li:nth-of-type(3)').on('click',function(){
-						clearInterval( timer );
-						$('.cover').fadeOut('fast');
-						retimenum = 3;
-						$('.cover i').text(3);
-					});
-				}
-			},1000 );
-		});
-	};
-	exports.cart = cart;
-     
+    function cart() {
+        var retimenum = 3;
+        var timer = null;
+        $('.cart i').on('click', function() {
+            $('.cover').fadeIn();
+            clearInterval(timer);
+            timer = setInterval(function() {
+                retimenum--;
+                if (retimenum == 0) {
+                    clearInterval(timer);
+                    $('.cover').fadeOut('fast');
+                    retimenum = 3;
+                    $('.cover i').text(3);
+                }
+                else {
+                    $('.cover i').text(retimenum);
+                    $('.cover li:nth-of-type(2)').on('click', function() {
+                        window.location.href = $url + '/cart.html';
+                    });
+                    $('.cover li:nth-of-type(3)').on('click', function() {
+                        clearInterval(timer);
+                        $('.cover').fadeOut('fast');
+                        retimenum = 3;
+                        $('.cover i').text(3);
+                    });
+                }
+            }, 1000);
+        });
+    }
+    ;
+    exports.cart = cart;
+
     //底部导航
-	function footer(){
-		$('.footerBar li:nth-of-type(1)').on('click',function(){
-			window.location.href = $url;
-		});
-		$('.footerBar li').eq(1).on('click',function(){
-			window.location.href = 'tel:400-930-9303';
-		});
-		$('.footerBar li').eq(2).on('click',function(){
-			window.location.href = $url+'/cart.html';
-		});
-		$('.footerBar li').eq(3).on('click',function(){
-			window.location.href = $url+'/member.html';
-		});
-	};
-	exports.footer = footer;
-    
+    function footer() {
+        $('.footerBar li:nth-of-type(1)').on('click', function() {
+            window.location.href = $url;
+        });
+        $('.footerBar li').eq(1).on('click', function() {
+            window.location.href = 'tel:400-930-9303';
+        });
+        $('.footerBar li').eq(2).on('click', function() {
+            window.location.href = $url + '/cart.html';
+        });
+        $('.footerBar li').eq(3).on('click', function() {
+            window.location.href = $url + '/member.html';
+        });
+    }
+    ;
+    exports.footer = footer;
+
 });
