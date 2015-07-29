@@ -90,7 +90,7 @@ define(function(require, exports, module) {
         var search = $('#search').attr('value');
         var keywords = $('#keywords').attr('value');
         var url = $('#url').attr('value');
-        if (search = 'search') {
+        if (search == 'search') {
             var data = {'type': type, 'keywords': keywords, 'page': page, 'search': search};
         } else {
             var data = {'type': type, 'cat_id': cat_id, 'page': page};
