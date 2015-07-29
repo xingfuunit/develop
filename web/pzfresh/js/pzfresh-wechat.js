@@ -89,10 +89,11 @@ define(function(require, exports, module) {
         var click = $('#click').attr('value');
         var search = $('#search').attr('value');
         var keywords = $('#keywords').attr('value');
+        var url = $('#url').attr('value');
         if (page <= num || click == 'click') {
             status = false;
             $.ajax({
-                url: "http://localhost/yii2/wechat/web/index.php?r=site/product",
+                url: url,
                 type: "get",
                 data: {'type': type, 'cat_id': cat_id, 'page': page},
                 timeout: 1000,
