@@ -153,8 +153,19 @@ define(function(require, exports, module) {
     function cart() {
         var retimenum = 3;
         var timer = null;
+        var cartNum = $('.footerBar .cart-num');
+        var num = 0;
+         setInterval(function(){
+             if( cartNum.text() == 0 ){
+                cartNum.hide();
+            }
+            else{
+                cartNum.show();
+            }
+         },200);   
         $('.cart i').on('click', function() {
             $('.cover').fadeIn();
+            $('.cover i').text(3);  
             clearInterval(timer);
             timer = setInterval(function() {
                 retimenum--;
@@ -162,7 +173,8 @@ define(function(require, exports, module) {
                     clearInterval(timer);
                     $('.cover').fadeOut('fast');
                     retimenum = 3;
-                    $('.cover i').text(3);
+                    num++;
+                    cartNum.text( num );
                 }
                 else {
                     $('.cover i').text(retimenum);
