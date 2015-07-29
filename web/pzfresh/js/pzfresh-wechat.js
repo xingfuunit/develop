@@ -90,12 +90,17 @@ define(function(require, exports, module) {
         var search = $('#search').attr('value');
         var keywords = $('#keywords').attr('value');
         var url = $('#url').attr('value');
+        if (search == 'search') {
+            var data = {'type': type, 'keywords': keywords, 'page': page, 'search': search};
+        } else {
+            var data = {'type': type, 'cat_id': cat_id, 'page': page};
+        }
         if (page <= num || click == 'click') {
             status = false;
             $.ajax({
                 url: url,
                 type: "get",
-                data: {'type': type, 'cat_id': cat_id, 'page': page},
+                data: data,
                 timeout: 1000,
                 async: false,
                 success: function(result) {

@@ -24,8 +24,9 @@
             最近搜索
         </div>
         <div class="search-list">
-            <a href="/wap/gallery.html?scontent=n,12344">12344</a>
-            <a href="/wap/gallery.html?scontent=n,%E5%8F%B0%E6%B9%BE">台湾</a>			
+            <?php foreach ($keywords as $value) { ?>
+                <a href="/wap/gallery.html?scontent=n,12344"><?php echo $value; ?></a>
+            <?php } ?>
         </div>
     </div>
 </div>
