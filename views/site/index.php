@@ -31,10 +31,11 @@
 			<!---------- scroll end and content start ---------->
 			<div class="content">
 				<div class="search-wrapper">
-					<form action="/wap/search-result.html" method="post">
+					<form action="<?=Yii::$app->urlManager->createUrl('site/gallery')?>" method="get">
 						<div class="search-text">
 							<i class="fa fa-search"></i>
-							<input class="am-form-field" placeholder="搜索商品：请输入商品关键字" name="search_keywords" type="text">
+							<input class="am-form-field" placeholder="搜索商品：请输入商品关键字" name="keywords" type="text">
+							<input type="hidden" name="search" value="search">
 						</div>
 					</form>
 				</div>
@@ -42,7 +43,7 @@
 					<ul>
 						<li><a id="sidebar-open" href="javascript:void(0)"><img src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/img/icon/k1.jpg" draggable="false"></a></li>
 						<li><a href="http://www.pinzhen365.com/wap/active-alist.html"><img src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/img/icon/k2.jpg" draggable="false"></a></li>
-						<li><a href="http://www.pinzhen365.com/wap/gallery-productsHot.html"><img src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/img/icon/k3.jpg" draggable="false"></a></li>
+						<li><a href="<?=Yii::$app->urlManager->createUrl('site/hotproducts')?>"><img src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/img/icon/k3.jpg" draggable="false"></a></li>
 						<li><a href="http://www.pinzhen365.com/wap/active-hyday.html"><img src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/img/icon/k4.jpg" draggable="false"></a></li>
 					</ul>
 				</div>
@@ -100,7 +101,7 @@
 				<div class="pro-scan">
 					<?php foreach ($index_products as $product) { ?>
 					<div class="pro-item">
-						<h2 class="item-name"><?=$product['top_cat']['cat_name']?><a href="http://www.pinzhen365.com/wap/gallery-<?=$product['top_cat']['cat_id']?>.html">更多</a></h2>
+						<h2 class="item-name"><?=$product['top_cat']['cat_name']?><a href="<?=Yii::$app->urlManager->createUrl(['site/gallery/', 'cat_id' => $product['top_cat']['cat_id']])?>">更多</a></h2>
 						<ul>
 							<?php foreach ($product['products'] as $val) { ?>
 							<li>
@@ -133,7 +134,7 @@
 						</a>
 						<div class="sub-menu">
 							<?php foreach ($cat['son'] as $child) { ?>
-							<a href="http://www.pinzhen365.com/wap/gallery-<?=$child['cat_id']?>.html" class=""><?=$child['cat_name']?></a>
+							<a href="<?=Yii::$app->urlManager->createUrl(['site/gallery/', 'cat_id' => $child['cat_id']])?>" class=""><?=$child['cat_name']?></a>
 							<?php } ?>
 							<a href="http://www.pinzhen365.com/wap/gallery-<?=$cat['cat_id']?>.html" class="" title="<?=$cat['cat_name']?>">全部商品 »</a>
 						</div>
