@@ -50,7 +50,7 @@
             <ul>
                 <li><i class="fa fa-home"></i>首页</li>
                 <li><i class="fa fa-phone"></i>联系小珍</li>
-                <li><i class="fa fa-shopping-cart"></i>购物车</li>
+                <li><i class="fa fa-shopping-cart"></i>购物车<i class="cart-num">0</i></li>
                 <li><i class="fa fa-user"></i>我的品珍</li>
             </ul>
         </div>
@@ -59,7 +59,7 @@
         <ul>
             <li>加入购物车成功</li>
             <li>查看购物车</li>
-            <li>继续购物<!--(<i>3</i>)--></li>
+            <li>继续购物(<i>3</i>)</li>
         </ul>
     </div>
 </div>

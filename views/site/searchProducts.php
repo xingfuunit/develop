@@ -23,9 +23,12 @@
             <i class="fa fa-paper-plane"></i>
             最近搜索
         </div>
-        <div class="search-list">
-            <a href="/wap/gallery.html?scontent=n,12344">12344</a>
-            <a href="/wap/gallery.html?scontent=n,%E5%8F%B0%E6%B9%BE">台湾</a>			
+        <div  class="search-list">
+            <?php foreach ($keywords as $value) { ?>
+                <?php if (!empty($value)) { ?>
+                    <a href="#"><?php echo $value; ?></a>
+                <?php } ?>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -40,6 +43,6 @@
         <li><a href="http://www.pinzhen365.com/wap/member.html"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
     </ul>
 </footer>
-<script type="text/javascript" src="../js/sea.js"></script>
+<script type="text/javascript" src="<?php echo Yii::$app->request->hostInfo . Yii::$app->urlManager->baseUrl; ?>/pzfresh/js/sea.js"></script>
 <script type="text/javascript">
 </script>

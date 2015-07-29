@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use yii\helpers\Url;
 //引入DI容器
 use yii\di\Container;
+use yii\web\Cookie;
 
 class SiteController extends Controller {
 
@@ -225,7 +226,10 @@ class SiteController extends Controller {
     //商品列表
     public function actionGallery() {
 //        echo Yii::$app->request->hostInfo.Yii::$app->urlManager->baseUrl;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d37de061a179bd9d9a9990c1414e2bb126e71127
 //       echo \Yii::$app->urlManager->createUrl(['site/gallery',['cat_id'=>1]]);exit;
 //       \yii::$app->basePath.'\web\pzfresh\css\';
         $this->layout = 'productList';
@@ -249,7 +253,12 @@ class SiteController extends Controller {
         $cat_id = $request->get('cat_id');
         $page = $request->get('page', 1);
         $type = $request->get('type', 1);
+        $search = $request->get('search');
+        $keywords = $request->get('keywords', '');
         $ProductList = $this->productService->getProductList($cat_id, $page, $type);
+        if ($search) {
+            $ProductList = $this->productService->getProductList($keywords, $page, $type, $search);
+        }
         echo json_encode($ProductList);
     }
 
@@ -260,13 +269,21 @@ class SiteController extends Controller {
     }
 
     public function actionSearchproducts() {
-        return $this->render('searchProducts');
+        $cookies = \Yii::$app->request->cookies;
+        $keywords = $cookies->getValue('keywords');
+        $keywords = explode(',', $keywords);
+        $keywords = array_unique($keywords);
+        return $this->render('searchProducts', ['keywords' => $keywords]);
     }
 
     public function actionSearchresult() {
         $request = \Yii::$app->request;
-        $keywords = $request->post('keywords');
-        $this->redirect(['site/gallery', 'keywords' => $keywords, 'search' => 'search']);
+        $cookie = \Yii::$app->response->cookies;
+        $keyword = $request->post('keywords');
+        $keywords = $request->cookies->getValue('keywords') . ',' . $keyword;
+        $cookie_data = ['name' => 'keywords', 'value' => $keywords];
+        $cookie->add(new Cookie($cookie_data));
+        $this->redirect(['site/gallery', 'keywords' => $keyword, 'search' => 'search']);
     }
 
     public function actionDiscuss() {

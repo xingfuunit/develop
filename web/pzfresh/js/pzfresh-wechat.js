@@ -90,12 +90,17 @@ define(function(require, exports, module) {
         var search = $('#search').attr('value');
         var keywords = $('#keywords').attr('value');
         var url = $('#url').attr('value');
+        if (search == 'search') {
+            var data = {'type': type, 'keywords': keywords, 'page': page, 'search': search};
+        } else {
+            var data = {'type': type, 'cat_id': cat_id, 'page': page};
+        }
         if (page <= num || click == 'click') {
             status = false;
             $.ajax({
                 url: url,
                 type: "get",
-                data: {'type': type, 'cat_id': cat_id, 'page': page},
+                data: data,
                 timeout: 1000,
                 async: false,
                 success: function(result) {
@@ -153,8 +158,19 @@ define(function(require, exports, module) {
     function cart() {
         var retimenum = 3;
         var timer = null;
+        var cartNum = $('.footerBar .cart-num');
+        var num = 0;
+         setInterval(function(){
+             if( cartNum.text() == 0 ){
+                cartNum.hide();
+            }
+            else{
+                cartNum.show();
+            }
+         },200);   
         $('.cart i').on('click', function() {
             $('.cover').fadeIn();
+            $('.cover i').text(3);  
             clearInterval(timer);
             timer = setInterval(function() {
                 retimenum--;
@@ -162,7 +178,8 @@ define(function(require, exports, module) {
                     clearInterval(timer);
                     $('.cover').fadeOut('fast');
                     retimenum = 3;
-                    $('.cover i').text(3);
+                    num++;
+                    cartNum.text( num );
                 }
                 else {
                     $('.cover i').text(retimenum);
