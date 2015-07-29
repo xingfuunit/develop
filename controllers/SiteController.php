@@ -111,7 +111,7 @@ class SiteController extends Controller
 
         $this->getView()->title = '品珍鲜活';
         // Yii::app()->params['old_site'];
-        //$this->registerCss()
+        //$this->registerCssFile()
         return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_texts' => $roll_texts]);
     }
 
