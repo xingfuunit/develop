@@ -219,7 +219,6 @@ class SiteController extends Controller {
     //商品列表
     public function actionGallery() {
 //        echo Yii::$app->request->hostInfo.Yii::$app->urlManager->baseUrl;
-         
 //       echo \Yii::$app->urlManager->createUrl(['site/gallery',['cat_id'=>1]]);exit;
 //       \yii::$app->basePath.'\web\pzfresh\css\';
         $this->layout = 'productList';
@@ -243,7 +242,12 @@ class SiteController extends Controller {
         $cat_id = $request->get('cat_id');
         $page = $request->get('page', 1);
         $type = $request->get('type', 1);
+        $search = $request->get('search');
+        $keywords = $request->get('keywords', '');
         $ProductList = $this->productService->getProductList($cat_id, $page, $type);
+        if ($search) {
+            $ProductList = $this->productService->getProductList($keywords, $page, $type, $search);
+        }
         echo json_encode($ProductList);
     }
 
