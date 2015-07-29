@@ -262,17 +262,18 @@ class SiteController extends Controller {
         $cookies = \Yii::$app->request->cookies;
         $keywords = $cookies->getValue('keywords');
         $keywords = explode(',', $keywords);
+        $keywords = array_unique($keywords);
         return $this->render('searchProducts', ['keywords' => $keywords]);
     }
 
     public function actionSearchresult() {
         $request = \Yii::$app->request;
         $cookie = \Yii::$app->response->cookies;
-        $keywords = $request->post('keywords');
-        $keywords = $request->cookies->getValue('keywords') . ',' . $keywords;
+        $keyword = $request->post('keywords');
+        $keywords = $request->cookies->getValue('keywords') . ',' . $keyword;
         $cookie_data = ['name' => 'keywords', 'value' => $keywords];
         $cookie->add(new Cookie($cookie_data));
-        $this->redirect(['site/gallery', 'keywords' => $keywords, 'search' => 'search']);
+        $this->redirect(['site/gallery', 'keywords' => $keyword, 'search' => 'search']);
     }
 
     public function actionDiscuss() {
