@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\helpers\Url;
 //引入DI容器
 use yii\di\Container;
 
@@ -61,11 +62,28 @@ class SiteController extends Controller {
         ];
     }
 
+    public function actionEnter()
+    {
+        $this->getView()->title = '品珍鲜活';
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-reset.css');
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-wechat.css');
+
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'cover',
+            'value' => 1,
+        ]));
+        return $this->render('enterpage');
+    }
+
     public function actionIndex() {
         $cookies = Yii::$app->request->cookies;
-        $cover = $cookies->getValue('cover', '1');
+        $cover = [];
+        if ($cookies->has('cover')) {
+            $cover = $cookies['cover'];
+        }
         if (!$cover) {
-            $this->redirect('xxxx');
+            $this->redirect(Url::toRoute('site/index', true));
         }
         //获取分类树
         $tree = $this->categoryService->getCateTree();
@@ -75,24 +93,12 @@ class SiteController extends Controller {
             $products = $this->productService->getIndexProductListByCat($val['cat_id']);
             $index_products[] = ['top_cat' => ['cat_id' => $val['cat_id'], 'cat_name' => $val['cat_name']], 'products' => $products];
         }
-
         $list = $this->advertService->getAdvertList();
         //首页滚动banner
         $roll_banners = [];
         if (array_key_exists('index_roll_banner', $list)) {
             $roll_banners = $list['index_roll_banner'];
         }
-
-        //首页优惠券广告
-        /* $coup_ads = $list[4];
-          //促销图片广告
-          $pic_ads = $list[5];
-          //送免邮券广告
-          $freeship_ads = $list[6];
-          //滚动文字
-          $roll_texts = $list[7]; */
-        //print_r($list);
-        return $this->render('index', ['cat_tree' => $tree, '']);
 
         $coup_ads = [];
         if (array_key_exists('index_coup_banner', $list)) {
@@ -219,7 +225,7 @@ class SiteController extends Controller {
     //商品列表
     public function actionGallery() {
 //        echo Yii::$app->request->hostInfo.Yii::$app->urlManager->baseUrl;
-         
+
 //       echo \Yii::$app->urlManager->createUrl(['site/gallery',['cat_id'=>1]]);exit;
 //       \yii::$app->basePath.'\web\pzfresh\css\';
         $this->layout = 'productList';
