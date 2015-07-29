@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 //引入DI容器
 use yii\di\Container;
+use yii\web\Cookie;
 
 class SiteController extends Controller {
 
@@ -258,12 +259,19 @@ class SiteController extends Controller {
     }
 
     public function actionSearchproducts() {
-        return $this->render('searchProducts');
+        $cookies = \Yii::$app->request->cookies;
+        $keywords = $cookies->getValue('keywords');
+        $keywords = explode(',', $keywords);
+        return $this->render('searchProducts', ['keywords' => $keywords]);
     }
 
     public function actionSearchresult() {
         $request = \Yii::$app->request;
+        $cookie = \Yii::$app->response->cookies;
         $keywords = $request->post('keywords');
+        $keywords = $request->cookies->getValue('keywords') . ',' . $keywords;
+        $cookie_data = ['name' => 'keywords', 'value' => $keywords];
+        $cookie->add(new Cookie($cookie_data));
         $this->redirect(['site/gallery', 'keywords' => $keywords, 'search' => 'search']);
     }
 
