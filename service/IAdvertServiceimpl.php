@@ -26,7 +26,7 @@ class IAdvertServiceimpl extends Object implements IAdvertService
                 $advert_list[$ad_position] = $list;
             } else {
                 foreach ($list as $advert) {
-                    $advert_list[$advert->ad_position] = $advert->getattributes();
+                    $advert_list[$advert->ad_position][] = $advert->getattributes();
                 }
             }
         }

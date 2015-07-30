@@ -80,12 +80,12 @@ class SiteController extends Controller {
     public function actionIndex() {
         $cookies = Yii::$app->request->cookies;
         $cover = [];
-        if ($cookies->has('cover')) {
+        /*if ($cookies->has('cover')) {
             $cover = $cookies['cover'];
         }
         if (!$cover) {
-            $this->redirect(Url::toRoute('site/index', true));
-        }
+            $this->redirect(Url::toRoute('site/enter', true));
+        }*/
         //获取分类树
         $tree = $this->categoryService->getCateTree();
         //获取顶级分类
@@ -95,6 +95,7 @@ class SiteController extends Controller {
             $index_products[] = ['top_cat' => ['cat_id' => $val['cat_id'], 'cat_name' => $val['cat_name']], 'products' => $products];
         }
         $list = $this->advertService->getAdvertList();
+
         //首页滚动banner
         $roll_banners = [];
         if (array_key_exists('index_roll_banner', $list)) {
@@ -124,7 +125,7 @@ class SiteController extends Controller {
         $this->getView()->title = '品珍鲜活';
         // Yii::app()->params['old_site'];
         //$this->registerCssFile()
-        return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_texts' => $roll_texts]);
+        return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_banners' => $roll_banners, 'coup_ads' => $coup_ads, 'pic_ads' => $pic_ads, 'freeship_ads' => $freeship_ads, 'roll_texts' => $roll_texts]);
     }
 
     public function actionLogin() {
@@ -225,14 +226,6 @@ class SiteController extends Controller {
 
     //商品列表
     public function actionGallery() {
-<<<<<<< HEAD
-=======
-//        echo Yii::$app->request->hostInfo.Yii::$app->urlManager->baseUrl;
-
-
-//       echo \Yii::$app->urlManager->createUrl(['site/gallery',['cat_id'=>1]]);exit;
-//       \yii::$app->basePath.'\web\pzfresh\css\';
->>>>>>> c574c4bd1bcb4918807c3082ecabe2ff463f5b89
         $this->layout = 'productList';
         $request = \Yii::$app->request;
         $cat_id = $request->get('cat_id');
@@ -292,6 +285,13 @@ class SiteController extends Controller {
         $product_id = (int) $request->get('product_id');
         $page = (int) $request->get('page');
         //echo json_encode();
+        $this->getView()->title = '评论列表-品珍鲜活';
+        return $this->render('comments');
+    }
+
+    public function actionGet()
+    {
+
     }
 
 }
