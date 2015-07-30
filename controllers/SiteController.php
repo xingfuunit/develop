@@ -225,14 +225,11 @@ class SiteController extends Controller {
 
     //商品列表
     public function actionGallery() {
-<<<<<<< HEAD
-=======
 //        echo Yii::$app->request->hostInfo.Yii::$app->urlManager->baseUrl;
 
 
 //       echo \Yii::$app->urlManager->createUrl(['site/gallery',['cat_id'=>1]]);exit;
 //       \yii::$app->basePath.'\web\pzfresh\css\';
->>>>>>> c574c4bd1bcb4918807c3082ecabe2ff463f5b89
         $this->layout = 'productList';
         $request = \Yii::$app->request;
         $cat_id = $request->get('cat_id');
