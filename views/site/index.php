@@ -136,7 +136,7 @@
 							<?php foreach ($cat['son'] as $child) { ?>
 							<a href="<?=Yii::$app->urlManager->createUrl(['site/gallery/', 'cat_id' => $child['cat_id']])?>" class=""><?=$child['cat_name']?></a>
 							<?php } ?>
-							<a href="http://www.pinzhen365.com/wap/gallery-<?=$cat['cat_id']?>.html" class="" title="<?=$cat['cat_name']?>">全部商品 »</a>
+							<a href="<?=Yii::$app->urlManager->createUrl(['site/gallery/', 'cat_id' => $cat['cat_id']])?>" class="" title="<?=$cat['cat_name']?>">全部商品 »</a>
 						</div>
 					</li>
 					<?php } ?>
