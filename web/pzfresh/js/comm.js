@@ -19,8 +19,8 @@ define(function(require, exports, module) {
             mask.hide();
         });
 
-        //领取礼包
         $('.get-gift').click(function(){
+            var coupon = $(this).data('coupon');
             mask.show();
             alert_loading.show();
             //ajax
@@ -53,14 +53,14 @@ define(function(require, exports, module) {
         $('.add-to-cart').click(function(){
             mask.show();
             alert_loading.show();
-            
+
             //ajax
             //$.ajax
-            
+
             setTimeout(function(){
                 alert_loading.hide();
                 alert_cart.show();
-                
+
                 if(cart_num.length>0){
                     cart_num.text(parseInt(cart_num.text())+1);
                 }

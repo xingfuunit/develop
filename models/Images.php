@@ -49,11 +49,6 @@ class Images extends \yii\db\ActiveRecord
 
     public function getDefaultImages($image_id_list)
     {
-        //$db = \Yii::$app->db;
-        //$sql = "SELECT * FROM ".self::tableName()." WHERE image_id in (".implode(',', $image_id_list).")";
-        //$command = $db->createCommand($sql);
-        //$command->bindParam(":image_id_str", implode(',', $image_id_list));
-        //$res = $command->queryAll();
         $res = self::find()->where(['image_id' => $image_id_list])->all();
         return $res;
     }

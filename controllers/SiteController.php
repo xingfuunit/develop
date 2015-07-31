@@ -280,13 +280,13 @@ class SiteController extends Controller {
         $this->redirect(['site/gallery', 'keywords' => $keyword, 'search' => 'search']);
     }
 
-    public function actionDiscuss() {
+    public function actionComment() {
         $request = \Yii::$app->request;
         $product_id = (int) $request->get('product_id');
         $page = (int) $request->get('page');
         //echo json_encode();
         $this->getView()->title = '评论列表-品珍鲜活';
-        return $this->render('comments');
+        return $this->render('comments', $comment_list);
     }
 
     public function actionGet()

@@ -66,7 +66,7 @@ class Product extends \yii\db\ActiveRecord
     public function getIndexProductList($cat_list)
     {
         $db = \Yii::$app->db;
-        $sql = "SELECT p.product_name,p.goods_type,p.product_id,p.price,g.buy_count,g.image_default_id FROM pzf_goods AS g LEFT JOIN ".self::tableName()." as p ON g.goods_id=p.goods_id WHERE g.is_index=1 AND cat_id in (".implode(',', $cat_list).") AND p.is_default=1 AND p.marketable=1";
+        $sql = "SELECT p.product_name,p.goods_type,p.product_id,p.price,g.buy_count,g.image_default_id,g.goods_id FROM pzf_goods AS g LEFT JOIN ".self::tableName()." as p ON g.goods_id=p.goods_id WHERE g.is_index=1 AND cat_id in (".implode(',', $cat_list).") AND p.is_default=1 AND p.marketable=1";
         $command = $db->createCommand($sql);
         //$command->bindParam(":cat_id_str", implode(',', $cat_list));
         $list = $command->queryAll();

@@ -67,7 +67,7 @@
 					<?php
 						} else {
 					?>
-					<p><a class="get-gift" href="javascript:void(0)" onclick="getCoupon('<?=$val['link_url']?>'"><img src="<?=$val['img_url']?>"></a></p>
+					<p><a class="get-gift" href="javascript:void(0)" data-coupon="<?=$val['link_url']?>"><img src="<?=$val['img_url']?>"></a></p>
 				<?php
 				    	}
                     }
@@ -82,7 +82,7 @@
 					<?php
 						} else {
 					?>
-					<p><a class="get-gift" href="javascript:void(0)" onclick="getCoupon('<?=$val['link_url']?>'"><img src="<?=$val['img_url']?>"></a></p>
+					<p><a class="get-gift" href="javascript:void(0)" onclick="getCoupon444('<?=$val['link_url']?>')"><img src="<?=$val['img_url']?>"></a></p>
 				<?php
 				    	}
                     }

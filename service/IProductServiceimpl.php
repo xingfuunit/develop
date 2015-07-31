@@ -19,23 +19,30 @@ class IProductServiceimpl extends Object implements IProductService {
     }
 
     public function getIndexProductListByCat($cat_id) {
-        //$list = Product::getInstance()->geIndexGoodsList();
         $category_service = \Yii::createObject('categoryservice');
         $cat_list = $category_service->getChildrenCat($cat_id);
         $product_list = Product::getInstance()->getIndexProductList($cat_list);
 
         $product_id_list = [];
+        $image_id_list = [];
         foreach ($product_list as $product) {
             $product_id_list[] = $product['product_id'];
+            $image_id_list[] = $product['image_default_id'];
         }
 
         //获取商品图片
-        $image_list = Images::getInstance()->getDefaultImages($product_id_list);
+        $image_list = Images::getInstance()->getDefaultImages($image_id_list);
+        $middle_img_list = [];
+        if ($image_list) {
+            foreach ($image_list as $value) {
+                $middle_img_list[$value->image_id] = $value->middle_url;
+            }
+        }
         foreach ($product_list as $k => $product) {
-            foreach ($image_list as $image) {
-                if ($product['image_id'] == $image['image_id']) {
-                    $product_id_list[$k]['img'] = $image['thumb_url'];
-                }
+            if (array_key_exists($product['image_default_id'], $middle_img_list)) {
+                $product_list[$k]['img'] = $middle_img_list[$product['image_default_id']];
+            } else {
+                $product_list[$k]['img'] = '';
             }
         }
 
