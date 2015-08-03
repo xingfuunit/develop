@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'pzfresh/css/wxshop.css',
+        //'pzfresh/css/wxshop.css',
         'pzfresh/css/font-awesome.min.css'
     ];
     public $js = [

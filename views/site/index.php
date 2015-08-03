@@ -3,7 +3,7 @@
 			<a class="company-link" href="">
 			<i class="fa fa-exclamation-circle"></i>
 			</a>
-			<a href="#">搜索商品 </a>
+			<a href="<?=Yii::$app->urlManager->createUrl('site/company')?>">公司简介</a>
 			</h1>
 		</header>
 

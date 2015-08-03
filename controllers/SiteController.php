@@ -123,6 +123,7 @@ class SiteController extends Controller {
         }
 
         $this->getView()->title = '品珍鲜活';
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/wxshop.css');
         // Yii::app()->params['old_site'];
         //$this->registerCssFile()
         return $this->render('index', ['cat_tree' => $tree, 'index_products' => $index_products, 'roll_banners' => $roll_banners, 'coup_ads' => $coup_ads, 'pic_ads' => $pic_ads, 'freeship_ads' => $freeship_ads, 'roll_texts' => $roll_texts]);
@@ -292,6 +293,14 @@ class SiteController extends Controller {
     public function actionGet()
     {
 
+    }
+
+    public function actionCompany()
+    {
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-reset.css');
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-wechat.css');
+        $this->getView()->title = '公司简介-品珍鲜活';
+        return $this->render('company');
     }
 
 }
