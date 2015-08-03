@@ -68,24 +68,10 @@ class SiteController extends Controller {
         $this->getView()->title = '品珍鲜活';
         Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-reset.css');
         Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-wechat.css');
-
-        $cookies = Yii::$app->response->cookies;
-        $cookies->add(new \yii\web\Cookie([
-            'name' => 'cover',
-            'value' => 1,
-        ]));
         return $this->render('enterpage');
     }
 
     public function actionIndex() {
-        $cookies = Yii::$app->request->cookies;
-        $cover = [];
-        /*if ($cookies->has('cover')) {
-            $cover = $cookies['cover'];
-        }
-        if (!$cover) {
-            $this->redirect(Url::toRoute('site/enter', true));
-        }*/
         //获取分类树
         $tree = $this->categoryService->getCateTree();
         //获取顶级分类
@@ -282,12 +268,16 @@ class SiteController extends Controller {
     }
 
     public function actionComment() {
-        $request = \Yii::$app->request;
+        /*$request = \Yii::$app->request;
         $product_id = (int) $request->get('product_id');
         $page = (int) $request->get('page');
         //echo json_encode();
         $this->getView()->title = '评论列表-品珍鲜活';
-        return $this->render('comments', $comment_list);
+        return $this->render('comments', $comment_list);*/
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('http://devjason.pinzhen365.com/wap/wapi.html?clt=goods&act=comments_list',
+          ['json' => ['goods_id' => 18, 'start_page' => 1, 'page_num' => 5]]);
+        echo $response->getBody();
     }
 
     public function actionGet()

@@ -4,6 +4,7 @@ namespace app\service;
 
 use app\models\Product;
 use app\models\Images;
+use yii;
 use yii\base\Object;
 use app\models\Goods;
 
@@ -40,7 +41,7 @@ class IProductServiceimpl extends Object implements IProductService {
         }
         foreach ($product_list as $k => $product) {
             if (array_key_exists($product['image_default_id'], $middle_img_list)) {
-                $product_list[$k]['img'] = $middle_img_list[$product['image_default_id']];
+                $product_list[$k]['img'] = Yii::$app->params['img_url'] . $middle_img_list[$product['image_default_id']];
             } else {
                 $product_list[$k]['img'] = '';
             }
