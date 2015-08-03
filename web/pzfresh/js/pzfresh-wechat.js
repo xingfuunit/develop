@@ -77,6 +77,7 @@ define(function(require, exports, module) {
     var page = 2;
     var num = $('#num').attr('value');
     var status = true;
+    var img_url = $('#img_url').attr('value');
     function addPage() {
         var scroll = $(window).scrollTop();
         var height = $(window).height();
@@ -108,7 +109,7 @@ define(function(require, exports, module) {
                     $.each(result, function(i, value) {
                         ajax = '<dl>' +
                                 '<dt>' +
-                                '<img src="http://pzfresh.com/public/images/a0/6a/99/6332cb1094516d4b562e919825e2577855e8d20d.jpg?1432019152#w"/>' +
+                                '<a href="/index.php?r=product/details&product_id=' + value.product_id + '"><img src="' + img_url + value.original_url + '"/></a>' +
                                 '</dt>' +
                                 '<dd>' +
                                 '<ul>' +
@@ -160,40 +161,51 @@ define(function(require, exports, module) {
         var timer = null;
         var cartNum = $('.footerBar .cart-num');
         var num = 0;
-         setInterval(function(){
-             if( cartNum.text() == 0 ){
+        setInterval(function() {
+            if (cartNum.text() == 0) {
                 cartNum.hide();
             }
-            else{
+            else {
                 cartNum.show();
             }
-         },200);   
+        }, 200);
         $('.cart i').on('click', function() {
-            $('.cover').fadeIn();
-            $('.cover i').text(3);  
-            clearInterval(timer);
-            timer = setInterval(function() {
-                retimenum--;
-                if (retimenum == 0) {
-                    clearInterval(timer);
-                    $('.cover').fadeOut('fast');
-                    retimenum = 3;
-                    num++;
-                    cartNum.text( num );
-                }
-                else {
-                    $('.cover i').text(retimenum);
-                    $('.cover li:nth-of-type(2)').on('click', function() {
-                        window.location.href = $url + '/cart.html';
-                    });
-                    $('.cover li:nth-of-type(3)').on('click', function() {
-                        clearInterval(timer);
-                        $('.cover').fadeOut('fast');
-                        retimenum = 3;
+            var car_url = $('#cart_url').attr('value');
+            $.ajax({
+                url: car_url,
+                type: "POST",
+                timeout: 1000,
+                success: function(result) {
+                    result = eval('(' + result + ')');
+                    if (result.result == 'ok') {
+                        $('.cover').fadeIn();
                         $('.cover i').text(3);
-                    });
+                        clearInterval(timer);
+                        timer = setInterval(function() {
+                            retimenum--;
+                            if (retimenum == 0) {
+                                clearInterval(timer);
+                                $('.cover').fadeOut('fast');
+                                retimenum = 3;
+                                num++;
+                                cartNum.text(num);
+                            }
+                            else {
+                                $('.cover i').text(retimenum);
+                                $('.cover li:nth-of-type(2)').on('click', function() {
+                                    window.location.href = $url + '/cart.html';
+                                });
+                                $('.cover li:nth-of-type(3)').on('click', function() {
+                                    clearInterval(timer);
+                                    $('.cover').fadeOut('fast');
+                                    retimenum = 3;
+                                    $('.cover i').text(3);
+                                });
+                            }
+                        }, 1000);
+                    }
                 }
-            }, 1000);
+            });
         });
     }
     ;
