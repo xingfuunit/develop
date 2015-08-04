@@ -238,7 +238,8 @@ class SiteController extends Controller
     //商品列表
     public function actionGallery()
     {
-        $this->layout = 'productList';
+        $this->getView()->title = '品珍精选';
+//        $this->layout = 'productList';
         $request = \Yii::$app->request;
         $cat_id = $request->get('cat_id');
         $page = $request->get('page', 1);
@@ -273,7 +274,7 @@ class SiteController extends Controller
 
     public function actionHotproducts()
     {
-        $this->layout = 'hotProducts';
+//        $this->layout = 'hotProducts';
         $HotProducts = $this->productService->getHotProducts();
         return $this->render('hotProducts', ['hotProducts' => $HotProducts]);
     }
