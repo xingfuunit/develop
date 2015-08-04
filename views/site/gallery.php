@@ -20,8 +20,8 @@
                         </dt>
                         <dd>
                             <ul>
-                                <li><?php echo $product['product_name']; ?></li>
                                 <li><?php echo $product['name']; ?></li>
+                                <li><?php echo isset($product['brief'])?$product['brief']:''; ?></li>
                                 <li class="middle">省<?php echo $product['mktprice'] - $product['price'] ?>元</li>
                                 <li class="current-price"><?php echo $product['price']; ?></li>
                                 <li class="old-price">
