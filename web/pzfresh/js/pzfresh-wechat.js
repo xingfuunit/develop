@@ -1,13 +1,14 @@
 define(function(require, exports, module) {
 
     var $url = 'http://pzfresh.com/wap';
+    var $search_url = $('#search_url').attr('value');
     //返回上一页
     function returnback() {
         $('.titleBar span').click(function() {
             history.back();
         });
         $('.fa-search').on('click', function() {
-            window.location.href = $url + '/simplesearch.html';
+            window.location.href = $search_url;
         });
         $('.fa-home').on('click', function() {
             window.location.href = $url;
@@ -151,10 +152,7 @@ define(function(require, exports, module) {
                 $('.page-num > i:first-child').text(num1);
             }
         }
-        cart();
-    }
-    ;
-
+    };
     //加入购物车，弹层信息 
     function cart() {
         var retimenum = 3;
@@ -169,18 +167,19 @@ define(function(require, exports, module) {
                 cartNum.show();
             }
         }, 200);
-        $('.cart').on('click', function() {
+        
+        $('.product').on('click','.cart', function() {
             var car_url = $('#cart_url').attr('value');
             var goods_id = $(this).attr('goods_id');
             var product_id = $(this).attr('product_id');
             var product_num = 1;
-            data={'goods_id':goods_id,'product_id':product_id,'product_num':product_num};
+            data = {'goods_id': goods_id, 'product_id': product_id, 'product_num': product_num};
             $.ajax({
                 url: car_url,
-                data:data,
+                data: data,
                 type: "POST",
-                timeout: 1000,
-                async: false,
+//                timeout: 1000,
+//                async: false,
                 success: function(result) {
                     result = eval('(' + result + ')');
                     if (result.result == 'ok') {
@@ -213,9 +212,9 @@ define(function(require, exports, module) {
                 }
             });
         });
-    }
-    ;
+    };
     exports.cart = cart;
+
 
     //底部导航
     function footer() {

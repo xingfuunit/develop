@@ -271,7 +271,7 @@ class SiteController extends Controller
         if ($search)
         {
             $ProductList = $this->productService->getProductList($keywords, $page, $type, $search);
-            $num = $this->productService->getProductNum($keywords,'search');
+            $num = $this->productService->getProductNum($keywords, 'search');
         }
         return $this->render('gallery', ['ProductList' => $ProductList, 'num' => $num, 'cat_id' => $cat_id, 'type' => $type, 'search' => $search, 'keywords' => $keywords]);
     }
@@ -353,8 +353,13 @@ class SiteController extends Controller
         $goods_id = $request->post('goods_id');
         $product_id = $request->post('product_id');
         $product_num = $request->post('product_num');
-        $cookies = Yii::$app->request->cookies;
-        $sid = $cookies->getValue('sid', uniqid());
+        $sid = $request->cookies->getValue('sid');
+        if (isset($sid))
+        {
+            $cookie = \Yii::$app->response->cookies;
+            $cookie_data = ['name' => 'sid', 'value' => uniqid()];
+            $cookie->add(new Cookie($cookie_data));
+        }
         $response = $client->post(Yii::$app->params['cart_add'], [
             'json' => [
                 'sid' => $sid,
