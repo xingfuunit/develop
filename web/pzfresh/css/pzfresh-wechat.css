@@ -16,6 +16,21 @@
 .footerBar ul > li i { position: absolute; left: 50%; width: 2rem; font-size: 2rem; margin-left: -1rem; margin-top: -0.5rem; }
 .footerBar ul > li:nth-child(3) i:nth-child(2) { position: absolute; top: 0; width: 1rem; height: 1rem; line-height: 1rem; border-radius: 1rem; text-align: center; font-size: 0.8rem; margin-left: -0.4rem; color: #fff; background: #f60; }
 
+header, footer { padding: 0 10px; color: #fff; }
+header a, footer a { color: #fff; }
+
+header { background: url("../img/bg/tt.jpg"); font-size: 20px; position: relative; line-height: 49px; text-align: center; }
+header h1 { font-size: 20px; font-weight: 400; }
+header .left { display: block; position: absolute; left: 20px; top: 0; }
+header .right { display: block; position: absolute; right: 20px; top: 0; }
+
+footer { font-size: 12px; background: #309ab2; position: fixed; left: 0; right: 0; bottom: 0; }
+footer ul { overflow: hidden; }
+footer ul li { float: left; width: 25%; text-align: center; height: auto; }
+footer ul li a { display: inline-block; margin-top: 4px; width: 100%; height: 45px; line-height: 14px; }
+footer ul li i { display: block !important; width: 24px; margin: 0 auto; line-height: 24px !important; font-size: 22px !important; }
+footer ul li i .cart-num { background-color: #DD514C; position: absolute; left: 20px; border-radius: 20px; padding: 3px 7px; font-weight: 700; font-size: 12px; line-height: 1; }
+
 /******************************************************************/
 .wrap { width: 100%; height: 100%; background: #f5f5f5; }
 .wrap .shop-list { position: relative; width: 100%; height: auto; padding-bottom: 5rem; }

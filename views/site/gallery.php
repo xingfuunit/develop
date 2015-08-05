@@ -47,14 +47,17 @@
         <span id='url' value="<?php echo Yii::$app->urlManager->createUrl(['site/product']); ?>"></span>
         <span id='cart_url' value="<?php echo Yii::$app->urlManager->createUrl(['site/cart']); ?>"></span>
         <span id='img_url' value="<?php echo yii::$app->params['img_url']; ?>"></span>
-        <div class="footerBar">
+        <footer class="footer">
             <ul>
-                <li><i class="fa fa-home"></i>首页</li>
-                <li><i class="fa fa-phone"></i>联系小珍</li>
-                <li><i class="fa fa-shopping-cart"></i>购物车<i class="cart-num">0</i></li>
-                <li><i class="fa fa-user"></i>我的品珍</li>
+                <li><a href="http://www.pinzhen365.com/"><i class="fa fa-home"></i><span>首页</span></a></li>
+                <li><a href="tel:400-930-9303"><i class="fa fa-phone"></i><span>联系小珍</span></a></li>
+                <li><a href="http://www.pinzhen365.com/wap/cart.html">
+                    <i class="fa fa-shopping-cart add-to-cart">
+                    <span class="cart-num">1</span>
+                </i><span>购物车</span></a></li>
+                <li><a href="http://www.pinzhen365.com/wap/member.html"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
             </ul>
-        </div>
+        </footer>
     </div>
     <div class="cover">
         <ul>
