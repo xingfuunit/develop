@@ -166,18 +166,7 @@
 				</div>
 			</div>
 		</div>
-		<footer class="footer">
-			<ul>
-				<li><a href="http://www.pinzhen365.com/"><i class="fa fa-home"></i><span>首页</span></a></li>
-				<li><a href="tel:400-930-9303"><i class="fa fa-phone"></i><span>联系小珍</span></a></li>
-				<li><a href="http://www.pinzhen365.com/wap/cart.html">
-					<i class="fa fa-shopping-cart add-to-cart">
-					<span class="cart-num">1</span>
-				</i><span>购物车</span></a></li>
-				<li><a href="http://dev.ecstore.pinzhen365.com/wap/link.html?
-clt=link&act=goto_membercenter&sid=safdddds22"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
-			</ul>
-		</footer>
+                <?php require(__DIR__ .'/footer.php');?>
 		<script type="text/javascript" src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/js/sea.js"></script>
 		<script type="text/javascript">
 			seajs.config({
