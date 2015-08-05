@@ -166,7 +166,7 @@
 				</div>
 			</div>
 		</div>
-                <?php require(__DIR__ .'/footer.php');?>
+        <?php require(__DIR__ .'/footer.php');?>
 		<script type="text/javascript" src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/js/sea.js"></script>
 		<script type="text/javascript">
 			seajs.config({

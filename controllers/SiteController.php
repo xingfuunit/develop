@@ -463,4 +463,34 @@ class SiteController extends Controller
         return $this->render('cache');
     }
 
+    public function actionGotocart()
+    {
+        $cookies = Yii::$app->response->cookies;
+        if (! $cookies->has('sid')) {
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'sid',
+                'value' => uniqid(),
+            ]));
+        }
+        $cookies = Yii::$app->request->cookies;
+        $sid = $cookies->getValue('sid');
+        $url = \Yii::$app->params['goto_cart'] . '&sid=' . $sid;
+        $this->redirect($url);
+    }
+
+    public function actionGotomembercenter()
+    {
+        $cookies = Yii::$app->response->cookies;
+        if (! $cookies->has('sid')) {
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'sid',
+                'value' => uniqid(),
+            ]));
+        }
+        $cookies = Yii::$app->request->cookies;
+        $sid = $cookies->getValue('sid');
+        $url = \Yii::$app->params['goto_membercenter'] . '&sid=' . $sid;
+        $this->redirect($url);
+    }
+
 }
