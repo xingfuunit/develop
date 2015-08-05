@@ -1,13 +1,14 @@
 define(function(require, exports, module) {
 
     var $url = 'http://pzfresh.com/wap';
+    var $search_url = $('#search_url').attr('value');
     //返回上一页
     function returnback() {
         $('.titleBar span').click(function() {
             history.back();
         });
         $('.fa-search').on('click', function() {
-            window.location.href = $url + '/simplesearch.html';
+            window.location.href = $search_url;
         });
         $('.fa-home').on('click', function() {
             window.location.href = $url;
@@ -77,6 +78,7 @@ define(function(require, exports, module) {
     var page = 2;
     var num = $('#num').attr('value');
     var status = true;
+    var img_url = $('#img_url').attr('value');
     function addPage() {
         var scroll = $(window).scrollTop();
         var height = $(window).height();
@@ -108,7 +110,7 @@ define(function(require, exports, module) {
                     $.each(result, function(i, value) {
                         ajax = '<dl>' +
                                 '<dt>' +
-                                '<img src="http://pzfresh.com/public/images/a0/6a/99/6332cb1094516d4b562e919825e2577855e8d20d.jpg?1432019152#w"/>' +
+                                '<a href="/index.php?r=product/details&product_id=' + value.product_id + '"><img src="' + img_url + value.original_url + '"/></a>' +
                                 '</dt>' +
                                 '<dd>' +
                                 '<ul>' +
@@ -119,8 +121,8 @@ define(function(require, exports, module) {
                                 '<li class="old-price">' +
                                 '<del>' + value.mktprice + '</del>' +
                                 '</li>' +
-                                '<li class="cart">' +
-                                '<i class="fa fa-shopping-cart"></i>' +
+                                '<li class="cart" goods_id = ' + value.goods_id + ' product_id=' + value.product_id + '>' +
+                                '<i class="fa fa-shopping-cart" ></i>' +
                                 '</li>' +
                                 '</ul>' +
                                 '</dd>' +
@@ -153,18 +155,17 @@ define(function(require, exports, module) {
         cart();
     }
     ;
-
     //加入购物车，弹层信息
     function cart() {
         var retimenum = 3;
         var timer = null;
         var cartNum = $('.footerBar .cart-num');
         var num = 0;
-         setInterval(function(){
-             if( cartNum.text() == 0 ){
+        setInterval(function() {
+            if (cartNum.text() == 0) {
                 cartNum.hide();
             }
-            else{
+            else {
                 cartNum.show();
             }
          },200);
@@ -190,14 +191,55 @@ define(function(require, exports, module) {
                         clearInterval(timer);
                         $('.cover').fadeOut('fast');
                         retimenum = 3;
+        }, 200);
+
+        $('.product').on('click','.cart', function() {
+            var car_url = $('#cart_url').attr('value');
+            var goods_id = $(this).attr('goods_id');
+            var product_id = $(this).attr('product_id');
+            var product_num = 1;
+            data = {'goods_id': goods_id, 'product_id': product_id, 'product_num': product_num};
+            $.ajax({
+                url: car_url,
+                data: data,
+                type: "POST",
+//                timeout: 1000,
+//                async: false,
+                success: function(result) {
+                    result = eval('(' + result + ')');
+                    if (result.result == 'ok') {
+                        $('.cover').fadeIn();
                         $('.cover i').text(3);
-                    });
+                        clearInterval(timer);
+                        timer = setInterval(function() {
+                            retimenum--;
+                            if (retimenum == 0) {
+                                clearInterval(timer);
+                                $('.cover').fadeOut('fast');
+                                retimenum = 3;
+                                num++;
+                                cartNum.text(num);
+                            }
+                            else {
+                                $('.cover i').text(retimenum);
+                                $('.cover li:nth-of-type(2)').on('click', function() {
+                                    window.location.href = $url + '/cart.html';
+                                });
+                                $('.cover li:nth-of-type(3)').on('click', function() {
+                                    clearInterval(timer);
+                                    $('.cover').fadeOut('fast');
+                                    retimenum = 3;
+                                    $('.cover i').text(3);
+                                });
+                            }
+                        }, 1000);
+                    }
                 }
-            }, 1000);
+            });
         });
-    }
-    ;
+    };
     exports.cart = cart;
+
 
     //底部导航
     function footer() {

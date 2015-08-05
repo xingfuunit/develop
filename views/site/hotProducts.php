@@ -27,8 +27,7 @@
                             <i>1</i>
                             <span>销量:<?php echo $product['buy_count'] ?>份</span>
                         </div>
-                        //<?php echo $product['large_url']; ?>
-                        <!--<img src="../img/sample/product_show1.png">-->
+                        <img src="<?php echo yii::$app->params['img_url'].$product['original_url']; ?>">
                     </div>
                     <div class="sell-desc">
                         <p class="title"><?php echo $product['name']; ?></p>

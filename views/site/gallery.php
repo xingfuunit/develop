@@ -13,28 +13,28 @@
         </ul>
         <ul class="shop-menu">
             <li class='product'>
-                <?php foreach ($ProductList as $product) { ?>
+                <?php foreach ($ProductList as $product)
+                { ?>
                     <dl>
                         <dt>
-                        <?php //echo $product['thumb_url']; ?>
-                        <img src="http://pzfresh.com/public/images/a0/6a/99/6332cb1094516d4b562e919825e2577855e8d20d.jpg?1432019152#w"/>
+                        <a href="<?php echo Yii::$app->urlManager->createUrl(['product/details', 'product_id' => $product['product_id']]); ?>"><img src="<?php echo yii::$app->params['img_url'] . $product['original_url']; ?>"/></a>
                         </dt>
                         <dd>
                             <ul>
-                                <li><?php echo $product['product_name']; ?></li>
                                 <li><?php echo $product['name']; ?></li>
+                                <li><?php echo isset($product['brief']) ? $product['brief'] : ''; ?></li>
                                 <li class="middle">省<?php echo $product['mktprice'] - $product['price'] ?>元</li>
                                 <li class="current-price"><?php echo $product['price']; ?></li>
                                 <li class="old-price">
                                     <del><?php echo $product['mktprice']; ?></del>
                                 </li>
-                                <li class="cart">
+                                <li class="cart" product_id="<?php echo $product['product_id']; ?>" goods_id="<?php echo $product['goods_id']; ?>">
                                     <i class="fa fa-shopping-cart"></i>
                                 </li>
                             </ul>	
                         </dd>
                     </dl>
-                <?php } ?>
+<?php } ?>
             </li>
         </ul>
         <span class="total-page">共<i><?php echo $num; ?></i>个商品</span>
@@ -46,14 +46,20 @@
         <span id='search' value="<?php echo $search ?>"></span>
         <span id='keywords' value="<?php echo $keywords ?>"></span>
         <span id='url' value="<?php echo Yii::$app->urlManager->createUrl(['site/product']); ?>"></span>
-        <div class="footerBar">
+        <span id='cart_url' value="<?php echo Yii::$app->urlManager->createUrl(['site/cart']); ?>"></span>
+        <span id='img_url' value="<?php echo yii::$app->params['img_url']; ?>"></span>
+        <span id='search_url' value="<?php echo Yii::$app->urlManager->createUrl(['site/searchproducts']); ?>"></span>
+        <footer class="footer">
             <ul>
-                <li><i class="fa fa-home"></i>首页</li>
-                <li><i class="fa fa-phone"></i>联系小珍</li>
-                <li><i class="fa fa-shopping-cart"></i>购物车<i class="cart-num">0</i></li>
-                <li><i class="fa fa-user"></i>我的品珍</li>
+                <li><a href="http://www.pinzhen365.com/"><i class="fa fa-home"></i><span>首页</span></a></li>
+                <li><a href="tel:400-930-9303"><i class="fa fa-phone"></i><span>联系小珍</span></a></li>
+                <li><a href="http://www.pinzhen365.com/wap/cart.html">
+                    <i class="fa fa-shopping-cart add-to-cart">
+                    <span class="cart-num">1</span>
+                </i><span>购物车</span></a></li>
+                <li><a href="http://www.pinzhen365.com/wap/member.html"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
             </ul>
-        </div>
+        </footer>
     </div>
     <div class="cover">
         <ul>

@@ -39,7 +39,7 @@ $config = [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,//启用路由
-            'showScriptName' => false,//false为隐藏 index.php
+            'showScriptName' => true,//false为隐藏 index.php
             'suffix'=>'.html',//后缀
             //规则
             'rules' => [

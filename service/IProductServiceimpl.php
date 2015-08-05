@@ -13,20 +13,24 @@ use app\models\Goods;
  * 实现商品业务逻辑接口
  *
  */
-class IProductServiceimpl extends Object implements IProductService {
+class IProductServiceimpl extends Object implements IProductService
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function getIndexProductListByCat($cat_id) {
+    public function getIndexProductListByCat($cat_id)
+    {
         $category_service = \Yii::createObject('categoryservice');
         $cat_list = $category_service->getChildrenCat($cat_id);
         $product_list = Product::getInstance()->getIndexProductList($cat_list);
 
         $product_id_list = [];
         $image_id_list = [];
-        foreach ($product_list as $product) {
+        foreach ($product_list as $product)
+        {
             $product_id_list[] = $product['product_id'];
             $image_id_list[] = $product['image_default_id'];
         }
@@ -34,15 +38,21 @@ class IProductServiceimpl extends Object implements IProductService {
         //获取商品图片
         $image_list = Images::getInstance()->getDefaultImages($image_id_list);
         $middle_img_list = [];
-        if ($image_list) {
-            foreach ($image_list as $value) {
+        if ($image_list)
+        {
+            foreach ($image_list as $value)
+            {
                 $middle_img_list[$value->image_id] = $value->middle_url;
             }
         }
-        foreach ($product_list as $k => $product) {
-            if (array_key_exists($product['image_default_id'], $middle_img_list)) {
+        foreach ($product_list as $k => $product)
+        {
+            if (array_key_exists($product['image_default_id'], $middle_img_list))
+            {
                 $product_list[$k]['img'] = Yii::$app->params['img_url'] . $middle_img_list[$product['image_default_id']];
-            } else {
+            }
+            else
+            {
                 $product_list[$k]['img'] = '';
             }
         }
@@ -59,9 +69,11 @@ class IProductServiceimpl extends Object implements IProductService {
      * $type 排序类型
      */
 
-    public function getProductList($cat_id, $page, $type, $search = NUlL) {
+    public function getProductList($cat_id, $page, $type, $search = NUlL)
+    {
         $product = array();
-        switch ($type) {
+        switch ($type)
+        {
             case 1://销量倒序
                 $order = "order by g.buy_count desc";
                 break;
@@ -82,12 +94,15 @@ class IProductServiceimpl extends Object implements IProductService {
         }
         $offset = 5;
         $pagesize = $page > 1 ? $offset * ($page - 1) : 0;
-        if ($search == 'search') {
+        if ($search == 'search')
+        {
             $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
                     . "join {{%images}} i on i.image_id = g.image_default_id  "
                     . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
                     . " and p.is_default = 1  $order limit :pagesize,:offset";
-        } else {
+        }
+        else
+        {
             $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
                     . "join {{%images}} i on i.image_id = g.image_default_id  "
                     . "where g.cat_id = :cat_id"
@@ -95,11 +110,14 @@ class IProductServiceimpl extends Object implements IProductService {
         }
         $db = \yii::$app->db;
         $command = $db->createCommand($sql);
-        if ($search == 'search') {
+        if ($search == 'search')
+        {
             $cat_id1 = '%' . $cat_id . '%';
             $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
             $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
-        } else {
+        }
+        else
+        {
             $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
         }
         $command->bindParam(":pagesize", $pagesize, \yii\db\mssql\PDO::PARAM_INT);
@@ -118,7 +136,8 @@ class IProductServiceimpl extends Object implements IProductService {
     }
 
     //热销商品
-    public function getHotProducts() {
+    public function getHotProducts()
+    {
         $sql = "select * from {{%goods}} g left  "
                 . "join {{%images}} i on i.image_id = g.image_default_id  "
                 . "join {{%product}} p on g.goods_id = p.goods_id "
@@ -127,6 +146,39 @@ class IProductServiceimpl extends Object implements IProductService {
         $command = $db->createCommand($sql);
         $HotProduct = $command->queryAll();
         return $HotProduct;
+    }
+
+    public function getProductNum($cat_id, $search = NULL)
+    {
+
+        if ($search == 'search')
+        {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
+                    . " and p.is_default = 1 ";
+        }
+        else
+        {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.cat_id = :cat_id"
+                    . " and p.is_default = 1";
+        }
+        $db = \yii::$app->db;
+        $command = $db->createCommand($sql);
+        if ($search == 'search')
+        {
+            $cat_id1 = '%' . $cat_id . '%';
+            $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
+            $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        }
+        else
+        {
+            $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        }
+        $productList = $command->queryAll();
+        return count($productList);
     }
 
 }
