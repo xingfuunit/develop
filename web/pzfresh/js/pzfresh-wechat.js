@@ -152,10 +152,8 @@ define(function(require, exports, module) {
                 $('.page-num > i:first-child').text(num1);
             }
         }
-        cart();
-    }
-    ;
-    //加入购物车，弹层信息
+    };
+    //加入购物车，弹层信息 
     function cart() {
         var retimenum = 3;
         var timer = null;
@@ -168,31 +166,8 @@ define(function(require, exports, module) {
             else {
                 cartNum.show();
             }
-         },200);
-        $('.cart i').on('click', function() {
-            $('.cover').fadeIn();
-            $('.cover i').text(3);
-            clearInterval(timer);
-            timer = setInterval(function() {
-                retimenum--;
-                if (retimenum == 0) {
-                    clearInterval(timer);
-                    $('.cover').fadeOut('fast');
-                    retimenum = 3;
-                    num++;
-                    cartNum.text( num );
-                }
-                else {
-                    $('.cover i').text(retimenum);
-                    $('.cover li:nth-of-type(2)').on('click', function() {
-                        window.location.href = $url + '/cart.html';
-                    });
-                    $('.cover li:nth-of-type(3)').on('click', function() {
-                        clearInterval(timer);
-                        $('.cover').fadeOut('fast');
-                        retimenum = 3;
         }, 200);
-
+        
         $('.product').on('click','.cart', function() {
             var car_url = $('#cart_url').attr('value');
             var goods_id = $(this).attr('goods_id');
