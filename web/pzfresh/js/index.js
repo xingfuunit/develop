@@ -113,7 +113,7 @@ define(function(require, exports, module) {
         });
 
         sidebar.find('.menu-nav').click(function(){
-            $(this).parent().addClass('open').siblings().removeClass('open');
+            $(this).parent().toggleClass('open').siblings().removeClass('open');
         });
     };
 });
