@@ -14,6 +14,6 @@ interface IProductService
 
     public function getHotProducts();
 
-    public function getProductNum($cat_id);
+    public function getProductNum($cat_id, $search = NULL);
 //    public function searchProduct($keywords, $page, $type);
 }

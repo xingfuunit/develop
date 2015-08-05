@@ -148,15 +148,35 @@ class IProductServiceimpl extends Object implements IProductService
         return $HotProduct;
     }
 
-    public function getProductNum($cat_id)
+    public function getProductNum($cat_id, $search = NULL)
     {
-        $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
-                . "join {{%images}} i on i.image_id = g.image_default_id  "
-                . "where g.cat_id = :cat_id"
-                . " and p.is_default = 1";
+
+        if ($search == 'search')
+        {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
+                    . " and p.is_default = 1 ";
+        }
+        else
+        {
+            $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
+                    . "join {{%images}} i on i.image_id = g.image_default_id  "
+                    . "where g.cat_id = :cat_id"
+                    . " and p.is_default = 1";
+        }
         $db = \yii::$app->db;
         $command = $db->createCommand($sql);
-        $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        if ($search == 'search')
+        {
+            $cat_id1 = '%' . $cat_id . '%';
+            $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
+            $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        }
+        else
+        {
+            $command->bindParam(":cat_id", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
+        }
         $productList = $command->queryAll();
         return count($productList);
     }

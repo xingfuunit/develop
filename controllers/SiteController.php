@@ -267,11 +267,12 @@ class SiteController extends Controller
         $search = $request->get('search');
         $ProductList = $this->productService->getProductList($cat_id, $page, $type);
         $keywords = $request->get('keywords', '');
+        $num = $this->productService->getProductNum($cat_id);
         if ($search)
         {
             $ProductList = $this->productService->getProductList($keywords, $page, $type, $search);
+            $num = $this->productService->getProductNum($keywords,'search');
         }
-        $num = $this->productService->getProductNum($cat_id);
         return $this->render('gallery', ['ProductList' => $ProductList, 'num' => $num, 'cat_id' => $cat_id, 'type' => $type, 'search' => $search, 'keywords' => $keywords]);
     }
 
@@ -347,21 +348,22 @@ class SiteController extends Controller
 
     public function actionCart()
     {
-        echo 123;exit;
-//        $client = new \GuzzleHttp\Client();
-//        $request = \Yii::$app->request;
-//        $goods_id = $request->post('goods_id');
-//        $product_id = $request->post('product_id');
-//        $product_num = $request->post('product_num');exit;
-//        $response = $client->post(Yii::$app->params['cart_add'], [
-//            'json' => [
-//                'sid' => uniqid(),
-//                'goods_id' => $goods_id,
-//                'product_id' => $product_id,
-//                'product_num' => $product_num,
-//            ]
-//        ]);
-//        echo $response->getBody();
+        $client = new \GuzzleHttp\Client();
+        $request = \Yii::$app->request;
+        $goods_id = $request->post('goods_id');
+        $product_id = $request->post('product_id');
+        $product_num = $request->post('product_num');
+        $cookies = Yii::$app->request->cookies;
+        $sid = $cookies->getValue('sid', uniqid());
+        $response = $client->post(Yii::$app->params['cart_add'], [
+            'json' => [
+                'sid' => $sid,
+                'goods_id' => $goods_id,
+                'product_id' => $product_id,
+                'product_num' => $product_num,
+            ]
+        ]);
+        echo $response->getBody();
     }
 
     public function actionCache()
