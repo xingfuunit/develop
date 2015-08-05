@@ -13,27 +13,28 @@
         </ul>
         <ul class="shop-menu">
             <li class='product'>
-                <?php foreach ($ProductList as $product) { ?>
+                <?php foreach ($ProductList as $product)
+                { ?>
                     <dl>
                         <dt>
-                        <a href="<?php echo Yii::$app->urlManager->createUrl(['product/details','product_id'=>$product['product_id']]); ?>"><img src="<?php echo yii::$app->params['img_url'].$product['original_url']; ?>"/></a>
+                        <a href="<?php echo Yii::$app->urlManager->createUrl(['product/details', 'product_id' => $product['product_id']]); ?>"><img src="<?php echo yii::$app->params['img_url'] . $product['original_url']; ?>"/></a>
                         </dt>
                         <dd>
                             <ul>
                                 <li><?php echo $product['name']; ?></li>
-                                <li><?php echo isset($product['brief'])?$product['brief']:''; ?></li>
+                                <li><?php echo isset($product['brief']) ? $product['brief'] : ''; ?></li>
                                 <li class="middle">省<?php echo $product['mktprice'] - $product['price'] ?>元</li>
                                 <li class="current-price"><?php echo $product['price']; ?></li>
                                 <li class="old-price">
                                     <del><?php echo $product['mktprice']; ?></del>
                                 </li>
-                                <li class="cart" product_id="<?php echo $product['product_id']; ?>" goods_id="<?php echo $product['goods_id'];?>">
+                                <li class="cart" product_id="<?php echo $product['product_id']; ?>" goods_id="<?php echo $product['goods_id']; ?>">
                                     <i class="fa fa-shopping-cart"></i>
                                 </li>
                             </ul>	
                         </dd>
                     </dl>
-                <?php } ?>
+<?php } ?>
             </li>
         </ul>
         <span class="total-page">共<i><?php echo $num; ?></i>个商品</span>
@@ -47,6 +48,7 @@
         <span id='url' value="<?php echo Yii::$app->urlManager->createUrl(['site/product']); ?>"></span>
         <span id='cart_url' value="<?php echo Yii::$app->urlManager->createUrl(['site/cart']); ?>"></span>
         <span id='img_url' value="<?php echo yii::$app->params['img_url']; ?>"></span>
+        <span id='search_url' value="<?php echo Yii::$app->urlManager->createUrl(['site/searchproducts']); ?>"></span>
         <div class="footerBar">
             <ul>
                 <li><i class="fa fa-home"></i>首页</li>
