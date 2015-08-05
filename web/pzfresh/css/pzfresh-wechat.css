@@ -1,5 +1,5 @@
 /******************************************************************/
-.titleBar, .footerBar { width: 100%; color: #fff; font-size: 1rem; padding: 0.5rem; background: #309ab2; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; z-index: 3; }
+.titleBar, .footerBar { width: 100%; color: #fff; font-size: 1.5rem; padding: 0.5rem; background: #309ab2; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; z-index: 3; }
 
 .titleBar { position: relative; height: 3rem; line-height: 3rem; }
 .titleBar > i { position: absolute; top: 50%; right: 1.5rem; height: 2rem; font-size: 1.5rem; line-height: 2rem; margin-top: -1rem; }
@@ -12,14 +12,14 @@
 .footerBar { position: fixed; left: 0; bottom: 0; height: 4rem; line-height: 4rem; }
 
 .footerBar ul { display: box; display: -webkit-box; display: -moz-box; width: 100%; height: 100%; }
-.footerBar ul > li { position: relative; -webkit-box-flex: 1; -moz-box-flex: 1; box-flex: 1; font-size: 0.8rem; text-align: center; }
-.footerBar ul > li i { position: absolute; left: 50%; width: 2rem; font-size: 1.5rem; margin-left: -1rem; }
+.footerBar ul > li { position: relative; -webkit-box-flex: 1; -moz-box-flex: 1; box-flex: 1; text-align: center; margin-top: 0.5rem; }
+.footerBar ul > li i { position: absolute; left: 50%; width: 2rem; font-size: 2rem; margin-left: -1rem; margin-top: -0.5rem; }
 .footerBar ul > li:nth-child(3) i:nth-child(2) { position: absolute; top: 0; width: 1rem; height: 1rem; line-height: 1rem; border-radius: 1rem; text-align: center; font-size: 0.8rem; margin-left: -0.4rem; color: #fff; background: #f60; }
 
 /******************************************************************/
 .wrap { width: 100%; height: 100%; background: #f5f5f5; }
 .wrap .shop-list { position: relative; width: 100%; height: auto; padding-bottom: 5rem; }
-.wrap .shop-list .shop-nav { position: relative; width: 100%; height: 2rem; line-height: 2rem; color: #a9b7b7; font-size: 1.05rem; text-align: center; display: box; display: -webkit-box; display: -moz-box; border-bottom: 1px solid #cdcdcd; }
+.wrap .shop-list .shop-nav { position: relative; width: 100%; height: 3rem; line-height: 3rem; color: #a9b7b7; font-size: 1.5rem; text-align: center; display: box; display: -webkit-box; display: -moz-box; border-bottom: 1px solid #cdcdcd; }
 .wrap .shop-list .shop-nav .active { border-bottom: 0.3rem solid #309ab2; }
 .wrap .shop-list .shop-nav .active i { display: inline-block; }
 .wrap .shop-list .shop-nav > li { position: relative; -webkit-box-flex: 1; -moz-box-flex: 1; box-flex: 1; height: 100%; color: #aaa; cursor: pointer; border-right: 1px solid #cdcdcd; }
@@ -27,7 +27,7 @@
 .wrap .shop-list .shop-nav > li:nth-child(2) > i:first-child { position: absolute; top: 0.5rem !important; }
 .wrap .shop-list .shop-nav > li:nth-child(2) > i:nth-child(2) { position: absolute; bottom: 0 !important; }
 .wrap .shop-list .shop-nav > li:nth-child(2) .active1 { color: #333; }
-.wrap .shop-list .shop-nav > li i { position: absolute; right: 10%; top: 50%; font-size: 1rem; width: 0.8rem; height: 0.8rem; margin-top: -0.4rem; display: none; }
+.wrap .shop-list .shop-nav > li i { position: absolute; right: 10%; top: 50%; font-size: 2rem; margin-top: -1rem; display: none; }
 .wrap .shop-list .shop-menu { width: 100%; height: auto; padding: 1rem; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; }
 .wrap .shop-list .shop-menu .rotate { position: relative; bottom: 0; left: 50%; width: 1rem; font-size: 2rem; margin-left: -0.5rem; z-index: 999; }
 .wrap .shop-list .shop-menu > li { width: 100%; height: auto; }
@@ -39,7 +39,7 @@
 .wrap .shop-list .shop-menu > li dl dd > ul > li { position: absolute; width: 100%; height: 1rem; line-height: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .wrap .shop-list .shop-menu > li dl dd > ul > li:nth-child(1) { top: 0.5rem; left: 0; }
 .wrap .shop-list .shop-menu > li dl dd > ul > li:nth-child(2) { top: 2rem; left: 0; }
-.wrap .shop-list .shop-menu > li dl dd > ul .middle { top: 50%; margin-top: -0.5rem; width: 5rem; border-radius: 1.5rem; color: #fff; background: #f96f37; text-align: center; }
+.wrap .shop-list .shop-menu > li dl dd > ul .middle { top: 50%; margin-top: -1rem; width: 5rem; padding: 0.5rem; border-radius: 1.5rem; color: #fff; background: #f96f37; text-align: center; }
 .wrap .shop-list .shop-menu > li dl dd > ul .current-price { left: 0; bottom: 2rem; font-size: 1rem; color: #dd514c; }
 .wrap .shop-list .shop-menu > li dl dd > ul .old-price { bottom: 0; left: 0; height: 1.5rem; font-size: 0.8rem; color: #aaa; }
 .wrap .shop-list .shop-menu > li dl dd > ul .cart { bottom: 0.5rem; right: 1rem; height: 1.9rem; }
