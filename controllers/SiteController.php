@@ -51,6 +51,26 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+//            [
+//                'class' => 'yii\filters\PageCache',
+//                'duration' => 1000,
+//                'only' => ['hotproducts', 'cache'],
+//                'dependency' => [
+//                    'class' => 'yii\caching\FileDependency',
+//                    'fileName' => '111.php'
+//                ]
+//            ],
+//            [
+//                'class' => 'yii\filters\HttpCache',
+//                'only' => ['hotproducts', 'cache','gallery'],
+//                'lastModified' => function ()
+//                {
+//                    return 123;
+//                },
+//                'etagSeed'=>  function(){
+//                    return 'adf';
+//                }
+//                ],
         ];
     }
 
@@ -327,13 +347,45 @@ class SiteController extends Controller
 
     public function actionCart()
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->post('http://devjason.pinzhen365.com/wap/wapi.html?clt=goods&act=comments_list', [
-            'json' => [
-                'goods_id' => 18,
-            ]
-        ]);
-        echo $response->getBody();
+        echo 123;exit;
+//        $client = new \GuzzleHttp\Client();
+//        $request = \Yii::$app->request;
+//        $goods_id = $request->post('goods_id');
+//        $product_id = $request->post('product_id');
+//        $product_num = $request->post('product_num');exit;
+//        $response = $client->post(Yii::$app->params['cart_add'], [
+//            'json' => [
+//                'sid' => uniqid(),
+//                'goods_id' => $goods_id,
+//                'product_id' => $product_id,
+//                'product_num' => $product_num,
+//            ]
+//        ]);
+//        echo $response->getBody();
+    }
+
+    public function actionCache()
+    {
+//        $cache = \yii::$app->cache;
+//        $cache->add('key','value');
+//        $data=$cache->get('key');
+//        var_dump($data);
+//        $cache->delete('key');
+//        $cache->flush();
+//        echo '<br>---------------<br>';
+//        var_dump($data);
+//        
+//        $dependency = new \yii\caching\FileDependency(['fileName' => '111.php']);
+//        $cache->set('key', 'filen', 3000, $dependency);
+//        $dependency = new \yii\caching\ExpressionDependency(
+//                ['expression' => '\yii::$app->request->get("name")']);
+//        $cache->set('key', 'expression', 3000, $dependency);
+//        $dependency = new \yii\caching\DbDependency(
+//                ['sql' => 'select count(*) from {{%goods}}']);
+////        $cache->set('key', 'db', 3000, $dependency);
+//        $data = $cache->get('key');
+//        var_dump($data);
+        return $this->render('cache');
     }
 
 }

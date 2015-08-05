@@ -120,8 +120,8 @@ define(function(require, exports, module) {
                                 '<li class="old-price">' +
                                 '<del>' + value.mktprice + '</del>' +
                                 '</li>' +
-                                '<li class="cart">' +
-                                '<i class="fa fa-shopping-cart"></i>' +
+                                '<li class="cart" goods_id = ' + value.goods_id + ' product_id=' + value.product_id + '>' +
+                                '<i class="fa fa-shopping-cart" ></i>' +
                                 '</li>' +
                                 '</ul>' +
                                 '</dd>' +
@@ -169,12 +169,18 @@ define(function(require, exports, module) {
                 cartNum.show();
             }
         }, 200);
-        $('.cart i').on('click', function() {
+        $('.cart').on('click', function() {
             var car_url = $('#cart_url').attr('value');
+            var goods_id = $(this).attr('goods_id');
+            var product_id = $(this).attr('product_id');
+            var product_num = 1;
+            data={'goods_id':goods_id,'product_id':product_id,'product_num':product_num};
             $.ajax({
                 url: car_url,
+                data:data,
                 type: "POST",
                 timeout: 1000,
+                async: false,
                 success: function(result) {
                     result = eval('(' + result + ')');
                     if (result.result == 'ok') {

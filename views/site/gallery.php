@@ -27,7 +27,7 @@
                                 <li class="old-price">
                                     <del><?php echo $product['mktprice']; ?></del>
                                 </li>
-                                <li class="cart">
+                                <li class="cart" product_id="<?php echo $product['product_id']; ?>" goods_id="<?php echo $product['goods_id'];?>">
                                     <i class="fa fa-shopping-cart"></i>
                                 </li>
                             </ul>	
