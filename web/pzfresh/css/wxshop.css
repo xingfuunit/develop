@@ -28,8 +28,6 @@ a:hover { text-decoration: none; }
 
 a:active, a:hover { outline: 0; }
 
-abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */ border-bottom: 1px dotted; cursor: help; }
-
 /* 重置表格元素 */
 table { border-collapse: collapse; border-spacing: 0; }
 
@@ -70,6 +68,29 @@ footer ul li i .cart-num { background-color: #DD514C; position: absolute; left: 
 .comm-alert .modal-alert .alert-cart-footer span:first-child { border-right: 1px solid #dedede; }
 .comm-alert .modal-alert .alert-cart-footer span { box-sizing: border-box; float: left; width: 50%; }
 .comm-alert .modal-alert i.loading { font-size: 20px; }
+
+.dialog-container .mask { background: rgba(0, 0, 0, 0.15); position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: none; z-index: 1090; }
+.dialog-container .dialog-box { display: none; z-index: 1100; position: fixed; left: 50%; transform: translate3D(-50%, -50%, 0); -ms-transform: translate3D(-50%, -50%, 0); /* IE 9 */ -webkit-transform: translate3D(-50%, -50%, 0); /* Safari and Chrome */ top: 50%; text-align: center; font-size: 16px; line-height: 1.5; box-sizing: border-box; /* .alert-loading-footer{
+	padding-bottom:1em;
+}
+.alert-cart-footer{
+	span:first-child{
+		border-right:1px solid #dedede;
+	}
+	span{
+		@include box-sizing;
+		float: left;
+		width: 50%;
+	}
+} */ }
+.dialog-container .dialog-box .dialog-msg > span { min-width: 40px; background: #fff; box-sizing: border-box; display: block; padding: 1em; width: 260px; background: #fff; }
+.dialog-container .dialog-box .dialog-msg.black > span { background: #333; color: #fff; }
+.dialog-container .dialog-box .dialog-msg.icon > span { width: auto; background: none; }
+.dialog-container .dialog-box .dialog-button { background: #fff; overflow: hidden; border-top: 1px solid #dedede; }
+.dialog-container .dialog-box .dialog-button > span { box-sizing: border-box; display: inline-block; cursor: pointer; padding: 0.5em; }
+.dialog-container .dialog-box .dialog-button.with-cancle > span { float: left; width: 50%; border-left: 1px solid #dedede; border-right: 1px solid #dedede; }
+.dialog-container .dialog-box .dialog-button.with-cancle > span:first-child { border-left: 0; }
+.dialog-container .dialog-box .dialog-button.with-cancle > span:last-child { border-right: 0; }
 
 /*******comm end*******/
 /********index*********/
@@ -130,7 +151,7 @@ footer ul li i .cart-num { background-color: #DD514C; position: absolute; left: 
 #p-detail section .sub-title > span:first-child { font-size: 1.8rem; font-weight: 600; color: #1e1e1e; }
 #p-detail section .sub-title .expanse-all { cursor: pointer; color: #007791; float: right; padding-right: 2.4rem; position: relative; }
 #p-detail section .sub-title .expanse-all i { position: absolute; display: block; width: 1em; height: 0.75em; right: 0; top: 0.4em; background: url("../img/icon/arrow-up.png") no-repeat; background-size: 0.9em 0.6em; }
-#p-detail section .sub-title i.read-more { position: absolute; display: block; width: 0.9em; height: 1.5em; right: 0; top: 0.3em; background: url("../img/icon/arrow-right.png") no-repeat; background-size: cover; }
+#p-detail section .sub-title i.read-more { font-size: 3rem; color: #ddd; position: absolute; right: 0; top: -0.4rem; }
 #p-detail section.ellipsis .expanse-all i { transform: rotate(180deg); -ms-transform: rotate(180deg); /* IE 9 */ -webkit-transform: rotate(180deg); /* Safari and Chrome */ }
 
 #p-detail #show .show-wrapper { overflow: hidden; padding-bottom: 70%; height: 0; }
