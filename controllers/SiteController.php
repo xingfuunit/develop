@@ -26,6 +26,7 @@ class SiteController extends Controller {
         $this->advertService = \Yii::createObject('advertservice');
         $this->categoryService = \Yii::createObject('categoryservice');
         $this->productService = \Yii::createObject('productservice');
+
         parent::__construct($id, $module, $config);
     }
 
@@ -104,7 +105,7 @@ class SiteController extends Controller {
         }
         //滚动文字
         $roll_texts = [];
-        if (array_key_exists('index_coup_mianyou', $list)) {
+        if (array_key_exists('index_roll_text', $list)) {
             $roll_texts = $list['index_roll_text'];
         }
 
@@ -268,21 +269,58 @@ class SiteController extends Controller {
     }
 
     public function actionComment() {
-        /*$request = \Yii::$app->request;
-        $product_id = (int) $request->get('product_id');
-        $page = (int) $request->get('page');
-        //echo json_encode();
+        $request = \Yii::$app->request;
+        $goods_id = (int) $request->get('goods_id');
+        $url = \Yii::$app->params['comments_list'];
         $this->getView()->title = '评论列表-品珍鲜活';
-        return $this->render('comments', $comment_list);*/
+        Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/wxshop.css');
         $client = new \GuzzleHttp\Client();
-        $response = $client->post('http://devjason.pinzhen365.com/wap/wapi.html?clt=goods&act=comments_list',
-          ['json' => ['goods_id' => 18, 'start_page' => 1, 'page_num' => 5]]);
-        echo $response->getBody();
+        $response = $client->post($url,
+          ['json' => ['goods_id' => $goods_id, 'start_page' => 1, 'page_num' => 10]]);
+        $json = $response->getBody();
+        $status = $response->getStatusCode();
+        if ($status == 200) {
+            $list = json_decode($json, true);
+            if ($list['result'] == 'ok') {
+                //print_r($list);exit;
+                $comment_list = $list['data']['list']['discuss'];
+                $total_page = $list['data']['discusstotalpage'];
+                return $this->render('comments', ['comment_list' => $comment_list, 'total_page' => $total_page]);
+            }
+        } else {
+            return false;
+        }
     }
 
-    public function actionGet()
+    public function actionDiscuss()
     {
+        $request = \Yii::$app->request;
+        $goods_id = (int) $request->post('goods_id');
+        $page = (int) $request->post('page');
+        $url = \Yii::$app->params['comments_list'];
 
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post($url,
+          ['json' => ['goods_id' => $goods_id, 'start_page' => $page, 'page_num' => 10]]);
+        $json = $response->getBody();
+        $status = $response->getStatusCode();
+        if ($status == 200) {
+            $list = json_decode($json, true);
+            if ($list['result'] == 'ok') {
+                $comment_list = $list['data']['list']['discuss'];
+                foreach ($comment_list as $k => $val) {
+                    $comment_list[$k]['time'] = date('Y.m.d H:i', $val['time']);
+                    if (array_key_exists('items', $val)) {
+                        foreach ($comment_list[$k]['items'] as $i => $v) {
+                            $comment_list[$k]['items'][$i]['time'] = date('Y.m.d H:i', $v['time']);
+                        }
+                    }
+                }
+                echo json_encode($comment_list);
+            }
+        } else {
+            return false;
+        }
     }
 
     public function actionCompany()
@@ -291,6 +329,36 @@ class SiteController extends Controller {
         Yii::$app->view->registerCssFile(Yii::$app->request->hostInfo.'/pzfresh/css/pzfresh-wechat.css');
         $this->getView()->title = '公司简介-品珍鲜活';
         return $this->render('company');
+    }
+
+    public function actionCoupon()
+    {
+        $url = \Yii::$app->params['wap_index_coupon'];
+        $cookies = Yii::$app->response->cookies;
+        if (! $cookies->has('sid')) {
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'sid',
+                'value' => uniqid(),
+            ]));
+        }
+        $cookies = Yii::$app->request->cookies;
+        $sid = $cookies->getValue('sid');
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post($url, ['sid' => $sid]);
+        $json = $response->getBody();
+        $status = $response->getStatusCode();
+        if ($status == 200) {
+            $result = json_decode($json, true);
+            if ($result['result'] == 'nologin') {
+                echo json_encode(['status' => 0, 'msg' => '您还没有登录，请登录！']);
+            } elseif ($result['result'] == 'ok') {
+                echo json_encode(['status' => 1, 'msg' => $result['data']['msg_info']]);
+            } else {
+                echo json_encode(['status' => 0, 'msg' => $result['error']]);
+            }
+        } else {
+            echo json_encode(['status' => 0, 'msg' => '网络出现问题']);
+        }
     }
 
 }

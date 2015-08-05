@@ -23,12 +23,28 @@ define(function(require, exports, module) {
             var coupon = $(this).data('coupon');
             mask.show();
             alert_loading.show();
-            //ajax
-            //$.ajax
-            setTimeout(function(){
+            $.ajax({
+                type: 'post',
+                url: coupon_url,
+                data: '',
+                cache: false,
+                dataType: 'text',
+                success: function(res) {
+                    var data = eval("("+res+")");
+                    alert_loading.hide();
+                    $('#alert-msg .alert-msg').text(data.msg);
+                    alert_msg.show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    loading_img.hide();
+                    loading = false;
+                }
+            });
+
+            /*setTimeout(function(){
                 alert_loading.hide();
                 alert_msg.show();
-            },3000);
+            },3000);*/
         });
 
         var shop_keep_time = 0;

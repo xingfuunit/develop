@@ -120,19 +120,23 @@ define(function(require, exports, module) {
     /***评论***/
     exports.commentsInit = function() {
         var loading = false,
-            loading_img = $('.decorate .loading');
-        container = $('.comm-list:first'),
+            loading_img = $('.decorate .loading'),
+            container = $('.comm-list:first'),
             total_page = parseInt(container.attr('commpage')),
             page = 1;
 
         if (total_page > 1) {
-            $(window).on('scroll', function() {
-                var tt = $(window).scrollTop() + $(window).height();
-                var hh = $(document).height() - 200;
-                if (tt > hh) {
-                    get_next_page();
-                };
-            });
+            next_page_invoke();
+            $(window).on('scroll',next_page_invoke);
+        }
+
+        function next_page_invoke() {
+            var tt = $(window).scrollTop() + $(window).height();
+            var hh = $(document).height() - 200;
+            if (tt > hh) {
+                //alert('scroll');
+                get_next_page();
+            };
         }
 
         function get_next_page() {
@@ -140,20 +144,29 @@ define(function(require, exports, module) {
                 return;
             };
             loading = true;
-
             loading_img.show();
-
-            var url = 'http:127.0.0.1:3000/json/comments.json';
+            var url = more_url;
 
             $.ajax({
-                type: 'get',
+                type: 'post',
                 url: url,
-                data: {},
+                data: 'goods_id=18&page=' + (page + 1),
                 cache: false,
-                dataType: 'json',
+                dataType: 'text',
                 success: function(data) {
                     page++;
-                    container.append(data.html);
+                    var res = eval("("+data+")");
+                    var show_html = '';
+                    for(var o in res){
+                        show_html += '<li><div class="comm-avater"><img src="/pzfresh/img/avater.png"></div><div class="comm-text"><div class="par-comm"><p class="comm-title"><span class="comm-tel">'+res[o].author+'</span><span class="comm-data">'+res[o].time+'</span></p><p class="comm-content">'+res[o].comment+'</p></div>';
+                        for(var i in res[o].items){
+                            if (res[o].items[i].display == 'true' && res[o].items[i].disabled == 'false') {
+                                show_html += '<div class="sub-comm"><p class="comm-title"><span class="comm-tel">品珍客服回复</span><span class="comm-data">'+res[o].items[i].time+'</span></p><p class="comm-content">'+res[o].items[i].comment+'</p></div>';
+                            }
+                        }
+                        show_html += '</div></li>';
+                    }
+                    container.append(show_html);
                     loading_img.hide();
                     loading = false;
                     if (page == total_page) {

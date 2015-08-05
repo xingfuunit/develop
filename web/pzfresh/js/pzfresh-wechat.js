@@ -154,7 +154,7 @@ define(function(require, exports, module) {
     }
     ;
 
-    //加入购物车，弹层信息 
+    //加入购物车，弹层信息
     function cart() {
         var retimenum = 3;
         var timer = null;
@@ -167,10 +167,10 @@ define(function(require, exports, module) {
             else{
                 cartNum.show();
             }
-         },200);   
+         },200);
         $('.cart i').on('click', function() {
             $('.cover').fadeIn();
-            $('.cover i').text(3);  
+            $('.cover i').text(3);
             clearInterval(timer);
             timer = setInterval(function() {
                 retimenum--;

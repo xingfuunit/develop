@@ -1,11 +1,4 @@
-		<header class="index-header">
-			<h1>
-			<a class="company-link" href="">
-			<i class="fa fa-exclamation-circle"></i>
-			</a>
-			<a href="<?=Yii::$app->urlManager->createUrl('site/company')?>">公司简介</a>
-			</h1>
-		</header>
+
 
 		<div id="index-page">
 			<?php if (! empty($roll_banners)) {
@@ -82,7 +75,7 @@
 					<?php
 						} else {
 					?>
-					<p><a class="get-gift" href="javascript:void(0)" onclick="getCoupon444('<?=$val['link_url']?>')"><img src="<?=$val['img_url']?>"></a></p>
+					<p><a class="get-gift" href="javascript:void(0)" onclick="getCoupon('<?=$val['link_url']?>')"><img src="<?=$val['img_url']?>"></a></p>
 				<?php
 				    	}
                     }
@@ -105,7 +98,7 @@
 						<ul>
 							<?php foreach ($product['products'] as $val) { ?>
 							<li>
-								<a href="<?=$val['product_id']?>">
+								<a href="<?=Yii::$app->urlManager->createUrl(['product/details/', 'product_id' => $val['product_id']])?>">
 								<img src="<?=$val['img']?>">
 								<div class="info">
 									<h3><?=$val['product_name']?></h3>
@@ -128,7 +121,7 @@
 			<div id="sidebar">
 				<ul class="menu">
 					<?php foreach ($cat_tree as $cat) { ?>
-					<li class="open">
+					<li>
 						<a class="menu-nav" href="javascript:void(0);">
 						<?=$cat['cat_name']?>
 						</a>
@@ -157,7 +150,6 @@
 			<!-- 提交结果 弹出框 -->
 			<div id="alert-msg" class="modal-alert">
 				<div class="alert-msg">
-					您还没有登录，请登录！
 				</div>
 				<div class="alert-but">
 					<span>确定</span>
@@ -182,7 +174,8 @@
 					<i class="fa fa-shopping-cart add-to-cart">
 					<span class="cart-num">1</span>
 				</i><span>购物车</span></a></li>
-				<li><a href="http://www.pinzhen365.com/wap/member.html"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
+				<li><a href="http://dev.ecstore.pinzhen365.com/wap/link.html?
+clt=link&act=goto_membercenter&sid=safdddds22"><i class="fa fa-user"></i><span>我的品珍</span></a></li>
 			</ul>
 		</footer>
 		<script type="text/javascript" src="<?php echo Yii::$app->request->hostInfo;?>/pzfresh/js/sea.js"></script>
@@ -200,4 +193,5 @@
 
 				comm.shopCart();
 			});
+			var coupon_url = "<?=Yii::$app->urlManager->createUrl('site/coupon')?>";
 		</script>
