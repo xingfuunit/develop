@@ -209,7 +209,7 @@ define(function(require, exports, module) {
                             }
                         }, 1000);
                     }else{
-                        $('cover').show();
+                        $('.cover').show();
                         $('.cover li').css('border','none');
                         $('.cover li:first-child').html( result.error );
                         $('.cover li:nth-child(2)').hide();
