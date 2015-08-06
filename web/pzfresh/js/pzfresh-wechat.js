@@ -209,7 +209,10 @@ define(function(require, exports, module) {
                             }
                         }, 1000);
                     }else{
-                        alert(result.error);
+                        $('.cover li').css('border','none');
+                        $('.cover li:first-child').html( result.error );
+                        $('.cover li:nth-child(2)').hide();
+                        $('.cover li:nth-child(3)').text('确定');
                     }
                 }
             });
