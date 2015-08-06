@@ -26,6 +26,7 @@ AppAsset::register($this);
         <?= $content ?>
         <?php $this->endBody() ?>
     </body>
+    <?php if(yii::$app->controller->action->id === 'gallery'){?>
     <script>
         $(function() {
             seajs.use('<?php echo Yii::$app->request->hostInfo . Yii::$app->urlManager->baseUrl; ?>/pzfresh/js/pzfresh-wechat', function(ex) {
@@ -37,5 +38,6 @@ AppAsset::register($this);
             });
         });
     </script>
+    <?php }?>
 </html>
 <?php $this->endPage() ?>

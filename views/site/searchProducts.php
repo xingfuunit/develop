@@ -1,6 +1,6 @@
 <header>
     <h1>
-        <a class="left" href="">
+        <a class="left" href="<?=Yii::$app->urlManager->createUrl('site/index')?>">
             <i class="fa fa-reply"></i>
         </a>
         <a href="#">搜索商品</a>
