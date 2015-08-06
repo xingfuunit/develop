@@ -98,7 +98,7 @@ class IProductServiceimpl extends Object implements IProductService
         {
             $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
                     . "join {{%images}} i on i.image_id = g.image_default_id  "
-                    . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
+                    . "where g.name like :cat_id1 "
                     . " and p.is_default = 1  $order limit :pagesize,:offset";
         }
         else
@@ -114,7 +114,6 @@ class IProductServiceimpl extends Object implements IProductService
         {
             $cat_id1 = '%' . $cat_id . '%';
             $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
-            $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
         }
         else
         {
@@ -155,7 +154,7 @@ class IProductServiceimpl extends Object implements IProductService
         {
             $sql = "select * from {{%goods}} g left join {{%product}} p on g.goods_id = p.goods_id "
                     . "join {{%images}} i on i.image_id = g.image_default_id  "
-                    . "where g.name like :cat_id1 or g.cat_id = :cat_id2 "
+                    . "where g.name like :cat_id1 "
                     . " and p.is_default = 1 ";
         }
         else
@@ -171,7 +170,6 @@ class IProductServiceimpl extends Object implements IProductService
         {
             $cat_id1 = '%' . $cat_id . '%';
             $command->bindParam(":cat_id1", $cat_id1, \yii\db\mssql\PDO::PARAM_STR);
-            $command->bindParam(":cat_id2", $cat_id, \yii\db\mssql\PDO::PARAM_INT);
         }
         else
         {
