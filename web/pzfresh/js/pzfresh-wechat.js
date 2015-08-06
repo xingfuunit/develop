@@ -212,7 +212,11 @@ define(function(require, exports, module) {
                         $('.cover li').css('border','none');
                         $('.cover li:first-child').html( result.error );
                         $('.cover li:nth-child(2)').hide();
-                        $('.cover li:nth-child(3)').text('确定');
+                        $('.cover li:nth-child(3)').text('确定').css({
+                            'position':'absolute',
+                            'bottom':0,
+                            'right':0
+                        });
                     }
                 }
             });
