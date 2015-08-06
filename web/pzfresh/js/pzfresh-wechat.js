@@ -209,11 +209,11 @@ define(function(require, exports, module) {
                             }
                         }, 1000);
                     }else{
-                        $('.cover').show();
-                        $('.cover li').css('border','none');
-                        $('.cover li:first-child').html( result.error );
-                        $('.cover li:nth-child(2)').hide();
-                        $('.cover li:nth-child(3)').text('确定').css({
+                        $('.cover_false').show();
+                        $('.cover_false li').css('border','none');
+                        $('.cover_false li:first-child').html( result.error );
+                        $('.cover_false li:nth-child(2)').hide();
+                        $('.cover_false li:nth-child(3)').text('确定').css({
                             'position':'absolute',
                             'bottom':0,
                             'right':0

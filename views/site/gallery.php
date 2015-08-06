@@ -58,4 +58,11 @@
             <li>继续购物(<i>3</i>)</li>
         </ul>
     </div>
+    <div class="cover_false">
+        <ul>
+            <li>加入购物车成功</li>
+            <li>查看购物车</li>
+            <li>继续购物(<i>3</i>)</li>
+        </ul>
+    </div>
 </div>
