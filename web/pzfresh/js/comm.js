@@ -70,10 +70,38 @@ define(function(require, exports, module) {
             mask.show();
             alert_loading.show();
 
-            //ajax
-            //$.ajax
+            var goods_id = $(this).attr('goods_id');
+            var product_id = $(this).attr('product_id');
+            var product_num = 1;
+            data = {'goods_id': goods_id, 'product_id': product_id, 'product_num': product_num};
+            $.ajax({
+                url: car_url,
+                data: data,
+                type: "POST",
+//                timeout: 1000,
+//                async: false,
+                success: function(result) {
+                    result = eval('(' + result + ')');
+                    alert_loading.hide();
+                    if (result.result == 'ok') {
+                        alert_cart.show();
+                        if(cart_num.length>0){
+                            cart_num.text(parseInt(cart_num.text())+1);
+                        }
 
-            setTimeout(function(){
+                        shop_keep_time = 4;
+                        //继续购物
+                        shop_keep();
+                    }else{
+                        $('#alert-msg .alert-msg').text(result.error);
+                        alert_msg.show();
+                        //alert(result.error);
+                    }
+                }
+            });
+        });
+
+            /*setTimeout(function(){
                 alert_loading.hide();
                 alert_cart.show();
 
@@ -85,7 +113,7 @@ define(function(require, exports, module) {
                 //继续购物
                 shop_keep();
             },3000);
-        });
+        });*/
 
         //继续购物关闭
         keep_shopping.click(hide_cart_alert);

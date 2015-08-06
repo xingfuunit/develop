@@ -107,7 +107,7 @@
 									<b>&yen;<?=$val['price']?></b>
 								</div>
 								</a>
-								<i class="fa fa-shopping-cart add-to-cart"></i>
+								<i class="fa fa-shopping-cart add-to-cart" goods_id="<?=$val['goods_id']?>" product_id="<?=$val['product_id']?>"></i>
 							</li>
 							<?php } ?>
 						</ul>
@@ -158,10 +158,10 @@
 			<!-- 加入购物车弹出框  -->
 			<div id="alert-cart" class="modal-alert ">
 				<div class="alert-msg">
-					您还没有登录，请登录！
+					加入购物车成功
 				</div>
 				<div class="alert-but alert-cart-footer">
-					<span><a href="/wap/cart.html">进入购物车</a></span>
+					<span><a href="<?=Yii::$app->urlManager->createUrl('site/gotocart')?>">进入购物车</a></span>
 					<span class="keep">继续购物</span>
 				</div>
 			</div>
@@ -183,4 +183,5 @@
 				comm.shopCart();
 			});
 			var coupon_url = "<?=Yii::$app->urlManager->createUrl('site/coupon')?>";
+			var car_url = "<?=Yii::$app->urlManager->createUrl('site/cart')?>";
 		</script>
