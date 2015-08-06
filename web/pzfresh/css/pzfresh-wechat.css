@@ -62,12 +62,13 @@ footer ul li i .cart-num { background-color: #DD514C; position: absolute; left: 
 .wrap .shop-list .total-page { position: absolute; bottom: 4.5rem; right: 1rem; font-size: 1rem; }
 .wrap .shop-list .total-page i { color: #dd514c; }
 .wrap .shop-list .page-num { position: fixed; left: 50%; bottom: 4.5rem; width: 4rem; height: 2rem; line-height: 2rem; font-size: 1.2rem; margin-left: -2rem; color: #fff; text-align: center; background: rgba(40, 40, 40, 0.4); border-radius: 1rem; }
-.wrap .cover { display: none; position: fixed; top: 0; left: 0; z-index: 2; width: 100%; height: 100%; background: rgba(40, 40, 40, 0.5); }
-.wrap .cover ul { position: fixed; top: 50%; left: 50%; width: 16rem; height: 7rem; font-size: 1rem; text-align: center; margin: -3rem 0 0 -8rem; background: #fff; z-index: 3; }
-.wrap .cover ul li { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; }
-.wrap .cover ul li:first-child { width: 100%; height: 4rem; line-height: 4rem; border-bottom: 1px solid #aaa; }
-.wrap .cover ul li:nth-child(2), .wrap .cover ul li:last-of-type { width: 50%; height: 3rem; line-height: 3rem; float: left; color: #309ab2; }
-.wrap .cover ul li:nth-child(2) { border-right: 1px solid #aaa; }
+.wrap .cover,.wrap .cover_false { display: none; position: fixed; top: 0; left: 0; z-index: 2; width: 100%; height: 100%; background: rgba(40, 40, 40, 0.5); }
+.wrap .cover ul ,.wrap .cover_false ul{ position: fixed; top: 50%; left: 50%; width: 16rem; height: 7rem; font-size: 1rem; text-align: center; margin: -3rem 0 0 -8rem; background: #fff; z-index: 3; }
+.wrap .cover ul li ,.wrap .cover_false ul li { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; }
+.wrap .cover ul li:first-child ,.wrap .cover_false ul li:first-child{ width: 100%; height: 4rem; line-height: 4rem; border-bottom: 1px solid #aaa; }
+.wrap .cover ul li:nth-child(2), .wrap .cover ul li:last-of-type,
+.wrap .cover_false ul li:nth-child(2),.wrap .cover_false ul li:last-of-type { width: 50%; height: 3rem; line-height: 3rem; float: left; color: #309ab2; }
+.wrap .cover ul li:nth-child(2),.wrap .cover_false ul li:nth-child(2) { border-right: 1px solid #aaa; }
 
 /******************************************************************/
 .company-desc { width: 100%; height: auto; padding-bottom: 4rem; }

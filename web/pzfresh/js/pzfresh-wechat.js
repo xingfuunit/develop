@@ -208,8 +208,8 @@ define(function(require, exports, module) {
                                 });
                             }
                         }, 1000);
-                    }else{
-                        $('.cover_false').show();
+                    }else if (result.result == 'false'){
+                        $('.cover_false').fadeIn();
                         $('.cover_false li').css('border','none');
                         $('.cover_false li:first-child').html( result.error );
                         $('.cover_false li:nth-child(2)').hide();
